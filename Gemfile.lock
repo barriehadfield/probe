@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/fkchang/opal-hot-reloader.git
+  revision: 3438a1cf49c3f5b3d0936b08b6c594c8458a651c
+  specs:
+    opal_hot_reloader (0.1.4)
+      listen (~> 3.0)
+      websocket
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -83,6 +91,8 @@ GEM
     eventmachine (1.2.3)
     execjs (2.7.0)
     ffi (1.9.18)
+    foreman (0.84.0)
+      thor (~> 0.19.1)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     hike (1.2.3)
@@ -293,9 +303,11 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
+  foreman
   hyperloop
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
+  opal_hot_reloader!
   puma (~> 3.7)
   rails (~> 5.1.1)
   sass-rails (~> 5.0)
