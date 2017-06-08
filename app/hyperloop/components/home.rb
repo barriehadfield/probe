@@ -17,9 +17,11 @@ module Home
   end
 
   class TopBar < Hyperloop::Component
-    render do
+    render(DIV) do
       NAV(class: 'navbar navbar-toggleable-sm fixed-top navbar bg-primary app-navbar') do
-        A(class: 'navbar-brand', href: '/') { "Beat" }
+        # UL(class: 'nav navbar-nav') do
+         A(class: 'nav-link', href: '/') { "Beat" } 
+        # end
       end
     end
   end
