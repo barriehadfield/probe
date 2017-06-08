@@ -5,10 +5,10 @@ module Home
         TopBar()
         BR()
         DIV(class: 'row') do
-          DIV(class: 'col-md-3') do
+          DIV(class: 'col-md-2') do
             Filters()
           end
-          DIV(class: 'col-md-9') do
+          DIV(class: 'col-md-10') do
             Cards()
           end
         end
@@ -33,8 +33,13 @@ module Home
   class Cards < Hyperloop::Component
     render(DIV) do
       5.times do
-        DIV(class: 'card') do
-          DIV(class: 'card-block') { "I am a Heart Card" }
+        DIV(class: 'card cursor-pointer') do
+          DIV(class: 'card-block') do
+            DIV(class: 'card-title') do
+              H4(class: "card-title") { "In-place editing in Transact will be super awsome!" }
+            end
+            DIV(class: 'card-text') { "I am a Heart Card" }
+          end
         end
         BR()
       end
