@@ -23,6 +23,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'hyperloop'
 gem 'opal_hot_reloader', git: 'https://github.com/fkchang/opal-hot-reloader.git'
 
+gem 'webpacker'
+
 gem 'foreman'
 
 # Use CoffeeScript for .coffee assets and views
