@@ -85,13 +85,13 @@ module Home
     end
 
     def close
-      # alert "close"
+      puts "close"
       mutate.show false
     end
 
     def modal
-      Bs.Modal(show: state.show, onHide: lambda { close }) {
-        Bs.ModalHeader { DIV { P {"header" } } }
+      Bs.Modal(show: state.show, animation: false, onHide: lambda { close }) {
+        Bs.ModalHeader {  H4 { "header" }  }
         Bs.ModalBody { DIV { P { "Body" } } }
       }
     end
@@ -102,6 +102,7 @@ module Home
     end
 
     render(DIV) do
+      modal
       DIV(class: 'card cursor-pointer') {
         DIV(class: 'card-block') {
           DIV(class: 'card-title') {
@@ -115,7 +116,7 @@ module Home
         # modal
       end
       # @modal.render
-      modal
+      # modal
     end
   end
 
