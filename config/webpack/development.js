@@ -17,7 +17,7 @@ module.exports = merge(sharedConfig, {
 
   externals: {
        "react": "React",
-       "react-dom": "ReactDom"
+       "react-dom": "ReactDOM"
    },
 
   devServer: {
