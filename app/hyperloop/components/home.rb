@@ -34,7 +34,9 @@ module Home
   class Filters < Hyperloop::Component
 
     def new_card_button
-      BUTTON(class: "btn btn-lg btn-danger") { "New Heart Card" }
+      BUTTON(class: "btn btn-lg btn-danger") { "New Heart Card" }.on(:click) do
+        mutate.show true
+      end
     end
 
     def learn_button
@@ -43,7 +45,29 @@ module Home
       ReactBootstrap.Button(bsStyle: 'success') { 'Save' }.on(:click) {  }
     end
 
-    render do
+    before_mount do
+      mutate.show false
+    end
+
+    def close
+      puts "close"
+      mutate.show false
+    end
+
+    def modal
+      Bs.Modal(show: state.show, animation: true, onHide: lambda { close }) {
+        Bs.ModalHeader {  H4 { "header" }  }
+        Bs.ModalBody { DIV { P { "Body" } } }
+      }
+    end
+
+    def clicked
+      puts "click"
+      mutate.show true
+    end
+
+    render(DIV) do
+      modal
       DIV(class: 'card') {
         DIV(class: 'card-block') {
           DIV(class: 'card-title') {
@@ -74,35 +98,35 @@ module Home
 
   class Card < Hyperloop::Component
 
-    before_mount do
-      mutate.show false
-      # @modal = Bs.Modal
-      # @button = Bs.Button({
-      #   bsStyle: "success",
-      #   bsSize: "large",
-      #   children: "Changes"
-      # })
-    end
-
-    def close
-      puts "close"
-      mutate.show false
-    end
-
-    def modal
-      Bs.Modal(show: state.show, animation: false, onHide: lambda { close }) {
-        Bs.ModalHeader {  H4 { "header" }  }
-        Bs.ModalBody { DIV { P { "Body" } } }
-      }
-    end
-
-    def clicked
-      puts "click"
-      mutate.show true
-    end
+    # before_mount do
+    #   mutate.show false
+    #   # @modal = Bs.Modal
+    #   # @button = Bs.Button({
+    #   #   bsStyle: "success",
+    #   #   bsSize: "large",
+    #   #   children: "Changes"
+    #   # })
+    # end
+    #
+    # def close
+    #   puts "close"
+    #   mutate.show false
+    # end
+    #
+    # def modal
+    #   Bs.Modal(show: state.show, animation: false, onHide: lambda { close }) {
+    #     Bs.ModalHeader {  H4 { "header" }  }
+    #     Bs.ModalBody { DIV { P { "Body" } } }
+    #   }
+    # end
+    #
+    # def clicked
+    #   puts "click"
+    #   mutate.show true
+    # end
 
     render(DIV) do
-      modal
+      # modal
       DIV(class: 'card cursor-pointer') {
         DIV(class: 'card-block') {
           DIV(class: 'card-title') {
@@ -112,7 +136,7 @@ module Home
           # @button.render
         }
       }.on(:click) do
-        clicked
+        # clicked
         # modal
       end
       # @modal.render
