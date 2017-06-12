@@ -54,10 +54,33 @@ module Home
       mutate.show false
     end
 
+    # def modal
+    #   DIV {
+    #     Modal.Modal(show: state.show, backdrop: true, onHide: lambda { close }) {
+    #       Modal.Modal.Header {
+    #         # Modal.Modal.Title(id: 'ModalHeader') { "Here is the title " }
+    #         H4 { "Header" }
+    #       }
+    #       Modal.Modal.Body { P { "Body" } }
+    #       # Modal.Footer {
+    #       #   Modal.Modal.Dismiss(className: 'btn btn-default') { "Cancel"}
+    #       # }
+    #     }
+    #   }
+    # end
+
     def modal
-      Bs.Modal(show: state.show, animation: true, onHide: lambda { close }) {
-        Bs.ModalHeader {  H4 { "header" }  }
-        Bs.ModalBody { DIV { P { "Body" } } }
+      DIV {
+        Bs.Modal(show: state.show, onHide: lambda { close }) {
+          Bs.ModalHeader {
+            # Modal.Modal.Title(id: 'ModalHeader') { "Here is the title " }
+            H4 { "Header" }
+          }
+          Bs.ModalBody { P { "Body" } }
+          # Modal.Footer {
+          #   Modal.Modal.Dismiss(className: 'btn btn-default') { "Cancel"}
+          # }
+        }
       }
     end
 
