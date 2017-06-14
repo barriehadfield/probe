@@ -1,0 +1,12 @@
+.cursor-pointer {
+  cursor:pointer;
+}
+
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 90% !important;
+   max-width:1200px;
+  }
+}
+
+/*old background f5f8fa*/

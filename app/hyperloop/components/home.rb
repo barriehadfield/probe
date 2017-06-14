@@ -34,7 +34,7 @@ module Home
   class Filters < Hyperloop::Component
 
     def new_card_button
-      BUTTON(class: "btn btn-lg btn-danger") { "New Heart Card" }.on(:click) do
+      BUTTON(class: "btn btn-danger") { "New Heart Card" }.on(:click) do
         mutate.show true
       end
     end
@@ -71,7 +71,7 @@ module Home
 
     def modal
       DIV {
-        Bs.Modal(show: state.show, onHide: lambda { close }) {
+        Bs.Modal(show: state.show, dialogClassName: "modal-xl", onHide: lambda { close }) {
           Bs.ModalHeader {
             # Modal.Modal.Title(id: 'ModalHeader') { "Here is the title " }
             H4 { "Header" }
