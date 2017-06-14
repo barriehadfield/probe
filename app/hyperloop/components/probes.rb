@@ -23,13 +23,11 @@ module Probes
     end
 
     def modal
-      DIV {
-        Bs.Modal(show: state.show_modal, dialogClassName: "modal-xl", onHide: lambda { close }) {
-          Bs.ModalHeader {
-            H4 { "Header" }
-          }
-          Bs.ModalBody { P { "Body" } }
+      Bs.Modal(show: state.show_modal, dialogClassName: "modal-xl", onHide: lambda { close }) {
+        Bs.ModalHeader {
+          H4 { "Header" }
         }
+        Bs.ModalBody { P { "Body" } }
       }
     end
 
