@@ -17,29 +17,15 @@ module Home
 
   class Filters < Hyperloop::Component
 
-    def new_card_button
-      BUTTON(class: "btn btn-danger") { "New Heart Card" }.on(:click) do
-        # mutate.show true
-      end
-    end
-
-    def learn_button
-      BUTTON(class: "btn btn-success") { "Learn about H.E.A.R.T" }
-      ReactBootstrap.Button(bsStyle: 'success') { 'Save' }.on(:click) {  }
-    end
-
     render(DIV) do
       DIV(class: 'card shadow') {
         DIV(class: 'card-block') {
           DIV(class: 'card-title') {
             H5 {
-              "Welcome Christine"
+              "Welcome Andy"
             }
             P { "Lots of new things have happened since you were last here." }
-          }
-          DIV(class: 'text-center') {
-            new_card_button
-            learn_button
+            Probes::Item(probe: Probe.new, new_probe: true)
           }
         }
       }

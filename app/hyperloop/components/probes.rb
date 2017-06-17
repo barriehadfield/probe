@@ -3,12 +3,19 @@ module Probes
   class Item < Hyperloop::Component
 
     param :probe
+    param new_probe: false
 
     state show_modal: false
 
     render(DIV) do
-      summary_card.on(:click) do
-        mutate.show_modal !state.show_modal
+      if params.new_probe
+        BUTTON(class: "btn btn-primary") { "New Probe" }.on(:click) do
+          mutate.show_modal !state.show_modal
+        end
+      else
+        summary_card.on(:click) do
+          mutate.show_modal !state.show_modal
+        end
       end
       modal if state.show_modal
     end
