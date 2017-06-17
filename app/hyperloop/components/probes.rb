@@ -6,6 +6,12 @@ module Probes
     param new_probe: false
 
     state show_modal: false
+    state edit_mode: false
+    state dirty: false
+
+    before_mount do
+      mutate.edit_mode (params.new_probe ? true : false)
+    end
 
     render(DIV) do
       if params.new_probe
@@ -29,7 +35,8 @@ module Probes
           DIV(class: 'card-title') {
             H4(class: "card-title link") {
               ProbeIcon()
-              " #{params.probe.name}"
+              SPAN {" "}
+              params.probe.name
             }
           }
           DIV(class: 'card-text') {
@@ -39,18 +46,31 @@ module Probes
       }
     end
 
+    def field f
+      if state.edit_mode
+        INPUT(type:text).on(:change) do |e|
+          params.probe.name = e.target.value
+        end
+      else
+        SPAN { "#{value}" }
+      end
+    end
+
     def modal
       Bs.Modal(show: state.show_modal, dialogClassName: "modal-xl", onHide: lambda { close }) {
         Bs.ModalHeader {
           H4 {
             ProbeIcon()
-            " #{params.probe.name}"
+            SPAN {" "}
+            field
           }
           SPAN(class: "text-right") {
             BUTTON(class: 'btn btn-secondary') { "Close" }.on(:click) { close }
           }
         }
-        Bs.ModalBody { P { "Body" } }
+        Bs.ModalBody {
+          P { "name: #{params.probe.name}" }
+        }
       }
     end
 
