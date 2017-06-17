@@ -6,6 +6,6 @@ end
 
 class ProbeIcon < Hyperloop::Component
   render do
-    SPAN(class: "i fa fa-gratipay")
+    SPAN(class: "i fa fa-heart")
   end
 end

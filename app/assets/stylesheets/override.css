@@ -18,7 +18,7 @@ body {
 }
 
 .link {
-    color: #1e8bc9;
+    color: #0275d8;
     cursor:pointer;
 }
 
@@ -28,5 +28,5 @@ body {
 }
 
 .link:active{
-  color:#1e8bc9;
+  color:#0275d8;
 }
