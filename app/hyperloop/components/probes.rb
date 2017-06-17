@@ -46,13 +46,14 @@ module Probes
       }
     end
 
-    def field f
+    def inplace_field f, placeholder
+      puts f.class.name
       if state.edit_mode
-        INPUT(type:text).on(:change) do |e|
-          params.probe.name = e.target.value
+        INPUT(type:text, placeholder: placeholder).on(:change) do |e|
+          params.probe[f.to_s] = e.target.value
         end
       else
-        SPAN { "#{value}" }
+        SPAN { params.probe.send(f) }
       end
     end
 
@@ -62,7 +63,7 @@ module Probes
           H4 {
             ProbeIcon()
             SPAN {" "}
-            field
+            inplace_field :name, "Name"
           }
           SPAN(class: "text-right") {
             BUTTON(class: 'btn btn-secondary') { "Close" }.on(:click) { close }
