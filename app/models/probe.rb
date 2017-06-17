@@ -1,2 +1,0 @@
-class Probe < ApplicationRecord
-end

@@ -9,4 +9,24 @@
   }
 }
 
-/*old background f5f8fa*/
+body {
+    background-color: #c0c0c0;
+}
+
+.shadow {
+    box-shadow: 7px 7px 7px #888888;
+}
+
+.link {
+    color: #1e8bc9;
+    cursor:pointer;
+}
+
+.link:hover{
+  color:#31708f;
+  /*text-decoration: bold;*/
+}
+
+.link:active{
+  color:#1e8bc9;
+}

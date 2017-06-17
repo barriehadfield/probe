@@ -29,10 +29,12 @@ module Home
     end
 
     render(DIV) do
-      DIV(class: 'card') {
+      DIV(class: 'card shadow') {
         DIV(class: 'card-block') {
           DIV(class: 'card-title') {
-            H5 { "Welcome Christine" }
+            H5 {
+              "Welcome Christine"
+            }
             P { "Lots of new things have happened since you were last here." }
           }
           DIV(class: 'text-center') {
@@ -46,8 +48,8 @@ module Home
 
   class Cards < Hyperloop::Component
     render(DIV) do
-      10.times do
-        Probes::Item()
+      Probe.all.each do |probe|
+        Probes::Item(probe: probe)
         BR()
       end
     end
