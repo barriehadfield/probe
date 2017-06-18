@@ -1,7 +1,7 @@
 module Home
   class Page < Hyperloop::Component
     render(DIV) do
-      DIV(class: 'container') {
+      DIV(class: 'container-fluid outer') {
         BR()
         DIV(class: 'row') {
           DIV(class: 'col-md-3') {
@@ -22,10 +22,13 @@ module Home
         DIV(class: 'card-block') {
           DIV(class: 'card-title') {
             H5 {
-              "Welcome Andy"
+              SPAN { "Probe " }
+              SMALL(class: 'text-muted') { "- from late Latin proba ‘proof’, in medieval Latin ‘examination’, from Latin probare ‘to test’." }
             }
-            P { "Lots of new things have happened since you were last here." }
-            Probes::Item(probe: Probe.new, new_probe: true)
+            BR()
+            DIV(class: 'text-center') {
+              Probes::Item(probe: Probe.new, new_probe: true)
+            }
           }
         }
       }
@@ -34,9 +37,8 @@ module Home
 
   class Cards < Hyperloop::Component
     render(DIV) do
-      Probe.all.each do |probe|
+      Probe.reverse.each do |probe|
         Probes::Item(probe: probe)
-        BR()
       end
     end
   end

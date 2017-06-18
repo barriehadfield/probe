@@ -50,22 +50,33 @@ module Probes
       if state.edit_mode
         INPUT(args).on(:change) do |e|
           params.probe[f.to_s] = e.target.value
+          mutate.dirty true
         end
       else
         SPAN { params.probe.send(f) }
       end
     end
 
+    def save
+      params.probe.save
+      mutate.dirty false
+    end
+
     def modal
       Bs.Modal(show: state.show_modal, dialogClassName: "modal-xl", onHide: lambda { close }) {
         Bs.ModalHeader {
           H4 {
-            ProbeIcon()
-            SPAN {" "}
-            inplace_field :name, { placeholder: "Name", size: 70 }
+            # ProbeIcon()
+            # SPAN {" "}
+            inplace_field :name, { placeholder: "Name", size: 60 }
           }
           SPAN(class: "text-right") {
-            BUTTON(class: 'btn btn-secondary') { "Close" }.on(:click) { close }
+            if state.dirty
+              BUTTON(class: 'btn btn-success') { "Save" }.on(:click) { save }
+              BUTTON(class: 'btn btn-secondary') { "Cancel" }.on(:click) { close }
+            else
+              BUTTON(class: 'btn btn-secondary') { "Close" }.on(:click) { close }
+            end
           }
         }
         Bs.ModalBody {

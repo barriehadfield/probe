@@ -10,11 +10,21 @@
 }
 
 body {
-    background-color: #c0c0c0;
+    /*background-color: #c0c0c0;*/
+    /*background-image: url("/back.png");*/
+    /*background-image: url("/497766142.jpg");*/
+    /*background-image: url("/10_5434.jpg");*/
+    /*background-image: url("/nav-grid.png");*/
+    background-image: url("/back-grey-grey.png");
+}
+
+.outer {
+  margin: 0px 20px 0px 20px;
 }
 
 .shadow {
-    box-shadow: 7px 7px 7px #888888;
+    box-shadow: 9px 9px 9px #535353;
+    margin: 20px 5px 30px 5px;
 }
 
 .link {
@@ -29,4 +39,8 @@ body {
 
 .link:active{
   color:#0275d8;
+}
+
+button {
+  margin: 5px 5px 5px 5px;
 }
