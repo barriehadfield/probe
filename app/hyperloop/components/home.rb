@@ -39,12 +39,12 @@ module Home
             DIV(class: 'text-center') {
               Probes::Item(probe: Probe.new, new_probe: true)
 
-              ButtonDropdown(color: 'primary', isOpen: state.is_open, toggle: lambda { toggle }) {
+              ButtonDropdown(class:'button-space', color: 'primary', isOpen: state.is_open, toggle: lambda { toggle }) {
                 DropdownToggle(caret: true) {
-                  "Settings"
+                  "X"
                 }
                 DropdownMenu {
-                  DropdownItem { "Edit"}
+                  DropdownItem { "Edit and then something long"}
                   DropdownItem { "Delete"}
                 }
               }
