@@ -63,27 +63,42 @@ module Probes
     end
 
     def modal
-      Modal(show: state.show_modal, dialogClassName: "modal-xl", onHide: lambda { close }) {
-        # ModalHeader {
-        #   H4 {
-        #     "Probe # 1"
-        #   }
-        #   SPAN(class: "text-right") {
-        #     if state.dirty
-        #       BUTTON(class: 'btn btn-success') { "Save" }.on(:click) { save }
-        #       BUTTON(class: 'btn btn-secondary') { "Cancel" }.on(:click) { close }
-        #     else
-        #       BUTTON(class: 'btn btn-secondary') { "Close" }.on(:click) { close }
-        #     end
-        #   }
-        # }
-        # ModalBody {
-        #   H4 {
-        #     input_inplace :name, { placeholder: "Name" }
-        #   }
-        # }
-        "xx"
+      Modal(isOpen: state.show_modal, class: "modal-xl", onHide: lambda { close }) {
+        ModalHeader(toggle: lambda { close }) {
+          H4 {
+            input_inplace :name, { placeholder: "Name" }
+          }
+        }
+        ModalBody {
+          P {
+            "body"
+          }
+        }
+        ModalFooter {
+          modal_footer
+        }
       }
+    end
+
+    def modal_footer
+      ButtonDropdown(class:'button-space',
+          color: 'primary',
+          isOpen: (state.is_open || false),
+          toggle: lambda { mutate.is_open !state.is_open }) {
+        DropdownToggle(caret: true) {
+          SettingsIcon()
+        }
+        DropdownMenu {
+          DropdownItem { "Edit"}
+          DropdownItem { "Delete"}
+        }
+      }
+      if state.dirty
+        BUTTON(class: 'btn btn-success') { "Save" }.on(:click) { save }
+        BUTTON(class: 'btn btn-secondary') { "Cancel" }.on(:click) { close }
+      else
+        BUTTON(class: 'btn btn-secondary') { "Close" }.on(:click) { close }
+      end
     end
 
     def close

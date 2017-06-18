@@ -38,20 +38,6 @@ module Home
             BR()
             DIV(class: 'text-center') {
               Probes::Item(probe: Probe.new, new_probe: true)
-
-              ButtonDropdown(class:'button-space',
-                  color: 'primary',
-                  isOpen: (state.is_open || false),
-                  toggle: lambda { mutate.is_open !state.is_open }) {
-                DropdownToggle(caret: true) {
-                  SettingsIcon()
-                }
-                DropdownMenu {
-                  DropdownItem { "Edit and then something long"}
-                  DropdownItem { "Delete"}
-                }
-              }
-
             }
           }
         }
