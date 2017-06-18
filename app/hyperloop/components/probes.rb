@@ -46,14 +46,14 @@ module Probes
       }
     end
 
-    def inplace_field f, args = {}
+    def input_inplace field, args = {}
       if state.edit_mode
-        INPUT(args).on(:change) do |e|
-          params.probe[f.to_s] = e.target.value
+        INPUT({}.merge(args)).on(:change) do |e|
+          params.probe[field.to_s] = e.target.value
           mutate.dirty true
         end
       else
-        SPAN { params.probe.send(f) }
+        SPAN { params.probe.send(field) }
       end
     end
 
@@ -66,9 +66,7 @@ module Probes
       Bs.Modal(show: state.show_modal, dialogClassName: "modal-xl", onHide: lambda { close }) {
         Bs.ModalHeader {
           H4 {
-            # ProbeIcon()
-            # SPAN {" "}
-            inplace_field :name, { placeholder: "Name", size: 60 }
+            "Probe # 1"
           }
           SPAN(class: "text-right") {
             if state.dirty
@@ -80,7 +78,9 @@ module Probes
           }
         }
         Bs.ModalBody {
-          P { "name: #{params.probe.name}" }
+          H4 {
+            input_inplace :name, { placeholder: "Name" }
+          }
         }
       }
     end
