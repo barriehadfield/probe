@@ -1,3 +1,3 @@
-class Bs < React::NativeLibrary
-  imports 'ReactBootstrap'
-end
+# class Bs < React::NativeLibrary
+#   imports 'ReactBootstrap'
+# end

@@ -9,3 +9,21 @@ class ProbeIcon < Hyperloop::Component
     SPAN(class: "i fa fa-heart")
   end
 end
+
+class SettingsIcon < Hyperloop::Component
+  render do
+    SPAN(class: "i fa fa-cog")
+  end
+end
+
+class SaveIcon <Hyperloop::Component
+  render do
+    SPAN(class: "i fa fa-check")
+  end
+end
+
+class CloseIcon <Hyperloop::Component
+  render do
+    SPAN(class: "i fa fa-times")
+  end
+end

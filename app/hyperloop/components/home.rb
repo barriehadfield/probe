@@ -17,6 +17,16 @@ module Home
 
   class Filters < Hyperloop::Component
 
+    # state is_open: false
+
+    before_mount do
+      mutate.is_open false
+    end
+
+    def toggle
+      mutate.is_open !state.is_open
+    end
+
     render(DIV) do
       DIV(class: 'card shadow') {
         DIV(class: 'card-block') {
@@ -28,6 +38,17 @@ module Home
             BR()
             DIV(class: 'text-center') {
               Probes::Item(probe: Probe.new, new_probe: true)
+
+              ButtonDropdown(color: 'primary', isOpen: state.is_open, toggle: lambda { toggle }) {
+                DropdownToggle(caret: true) {
+                  "Settings"
+                }
+                DropdownMenu {
+                  DropdownItem { "Edit"}
+                  DropdownItem { "Delete"}
+                }
+              }
+
             }
           }
         }

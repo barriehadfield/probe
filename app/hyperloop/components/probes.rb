@@ -63,25 +63,26 @@ module Probes
     end
 
     def modal
-      Bs.Modal(show: state.show_modal, dialogClassName: "modal-xl", onHide: lambda { close }) {
-        Bs.ModalHeader {
-          H4 {
-            "Probe # 1"
-          }
-          SPAN(class: "text-right") {
-            if state.dirty
-              BUTTON(class: 'btn btn-success') { "Save" }.on(:click) { save }
-              BUTTON(class: 'btn btn-secondary') { "Cancel" }.on(:click) { close }
-            else
-              BUTTON(class: 'btn btn-secondary') { "Close" }.on(:click) { close }
-            end
-          }
-        }
-        Bs.ModalBody {
-          H4 {
-            input_inplace :name, { placeholder: "Name" }
-          }
-        }
+      Modal(show: state.show_modal, dialogClassName: "modal-xl", onHide: lambda { close }) {
+        # ModalHeader {
+        #   H4 {
+        #     "Probe # 1"
+        #   }
+        #   SPAN(class: "text-right") {
+        #     if state.dirty
+        #       BUTTON(class: 'btn btn-success') { "Save" }.on(:click) { save }
+        #       BUTTON(class: 'btn btn-secondary') { "Cancel" }.on(:click) { close }
+        #     else
+        #       BUTTON(class: 'btn btn-secondary') { "Close" }.on(:click) { close }
+        #     end
+        #   }
+        # }
+        # ModalBody {
+        #   H4 {
+        #     input_inplace :name, { placeholder: "Name" }
+        #   }
+        # }
+        "xx"
       }
     end
 
