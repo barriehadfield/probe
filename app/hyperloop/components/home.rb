@@ -19,13 +19,13 @@ module Home
 
     # state is_open: false
 
-    before_mount do
-      mutate.is_open false
-    end
-
-    def toggle
-      mutate.is_open !state.is_open
-    end
+    # before_mount do
+    #   mutate.is_open false
+    # end
+    #
+    # def toggle
+    #   mutate.is_open !state.is_open
+    # end
 
     render(DIV) do
       DIV(class: 'card shadow') {
@@ -39,9 +39,12 @@ module Home
             DIV(class: 'text-center') {
               Probes::Item(probe: Probe.new, new_probe: true)
 
-              ButtonDropdown(class:'button-space', color: 'primary', isOpen: state.is_open, toggle: lambda { toggle }) {
+              ButtonDropdown(class:'button-space',
+                  color: 'primary',
+                  isOpen: (state.is_open || false),
+                  toggle: lambda { mutate.is_open !state.is_open }) {
                 DropdownToggle(caret: true) {
-                  "X"
+                  SettingsIcon()
                 }
                 DropdownMenu {
                   DropdownItem { "Edit and then something long"}
