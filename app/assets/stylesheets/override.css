@@ -10,12 +10,12 @@
 }
 
 body {
-    /*background-color: #c0c0c0;*/
+    background-color: #666666;
     /*background-image: url("/back.png");*/
     /*background-image: url("/497766142.jpg");*/
     /*background-image: url("/10_5434.jpg");*/
     /*background-image: url("/nav-grid.png");*/
-    background-image: url("/back-grey-grey.png");
+    /*background-image: url("/back-grey-grey.png");*/
 }
 
 .outer {
