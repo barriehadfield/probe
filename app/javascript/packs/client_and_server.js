@@ -1,9 +1,6 @@
 ReactDOM = require('react-dom');
 React = require('react');
 
-// ReactBootstrap = require('react-bootstrap');
-// Modal = require('react-bootstrap-modal');
-
 Modal = require('reactstrap').Modal;
 ModalHeader = require('reactstrap').ModalHeader;
 ModalBody = require('reactstrap').ModalBody;
@@ -16,3 +13,9 @@ ButtonDropdown = require('reactstrap').ButtonDropdown;
 DropdownToggle = require('reactstrap').DropdownToggle;
 DropdownMenu = require('reactstrap').DropdownMenu;
 DropdownItem = require('reactstrap').DropdownItem;
+
+Form = require('reactstrap').Form;
+FormGroup = require('reactstrap').FormGroup;
+Label = require('reactstrap').Label;
+Input = require('reactstrap').Input;
+FormText = require('reactstrap').FormText;
