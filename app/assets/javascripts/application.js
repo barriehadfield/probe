@@ -15,7 +15,6 @@
 //= require jquery_ujs
 //= require_tree .
 //= require hyperloop-loader
-
-//= require 'hyperloop-loader'
+//= require action_cable
 
 Opal.OpalHotReloader.$listen(25222)
