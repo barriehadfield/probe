@@ -1,14 +1,14 @@
 module Home
   class Page < Hyperloop::Component
-    render(DIV) do
-      DIV(class: 'container-fluid outer') {
+    render do
+      Container(class: 'outer', fluid: true) {
         BR()
         Row {
           Col(md: 3) {
             Filters()
           }
           Col(md: 9) {
-            Cards()
+            ProbeCards()
           }
         }
       }
@@ -16,26 +16,17 @@ module Home
   end
 
   class Filters < Hyperloop::Component
-
-    render(DIV) do
-      DIV(class: 'card shadow') {
-        DIV(class: 'card-block') {
-          DIV(class: 'card-title') {
-            H5 {
-              SPAN { "Probe " }
-              SMALL(class: 'text-muted') { "- from late Latin proba ‘proof’, in medieval Latin ‘examination’, from Latin probare ‘to test’." }
-            }
-            BR()
-            DIV(class: 'text-center') {
-              Probes::Item(probe: Probe.new, new_probe: true)
-            }
-          }
+    render do
+      Card(class: 'shadow') {
+        CardBlock {
+          CardTitle { "Workshare Probe" }
+          Probes::Item(probe: Probe.new, new_probe: true)
         }
       }
     end
   end
 
-  class Cards < Hyperloop::Component
+  class ProbeCards < Hyperloop::Component
     render(DIV) do
       Probe.reverse.each do |probe|
         Probes::Item(probe: probe)

@@ -26,3 +26,15 @@ InputGroupAddon = require('reactstrap').InputGroupAddon;
 Container = require('reactstrap').Container;
 Row = require('reactstrap').Row;
 Col = require('reactstrap').Col;
+
+Card = require('reactstrap').Card;
+CardImg = require('reactstrap').CardImg;
+CardImgOverlay = require('reactstrap').CardImgOverlay;
+CardText = require('reactstrap').CardText;
+CardBlock = require('reactstrap').CardBlock;
+CardGroup = require('reactstrap').CardGroup;
+CardTitle = require('reactstrap').CardTitle;
+CardSubtitle = require('reactstrap').CardSubtitle;
+CardFooter = require('reactstrap').CardFooter;
+CardDeck = require('reactstrap').CardDeck;
+CardColumns = require('reactstrap').CardColumns;
