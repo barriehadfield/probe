@@ -63,16 +63,60 @@ module Probes
           params.probe.name || "New Probe"
         }
         ModalBody {
-          input_inplace :name, { placeholder: "Probe Name" } if state.edit_mode
-          Row {
-            Col(md: 6) { "xxx" }
-            Col(md: 6) { "yyy" }
-          }
+          modal_body
         }
         ModalFooter {
           modal_footer
         }
       }
+    end
+
+    def modal_body
+      input_inplace :name, { placeholder: "Probe Name" } if state.edit_mode
+      TABLE(class: 'table table-bordered') {
+        THEAD {
+          TR {
+            TH { "" }
+            TH { "Goal" }
+            TH { "Signals" }
+            TH { "Metrics" }
+          }
+        }
+        TBODY {
+          TR {
+            TD { "Happiness" }
+            TD { "b" }
+            TD { "c" }
+            TD { "d" }
+          }
+          TR {
+            TD { "Engagement" }
+            TD { "b" }
+            TD { "c" }
+            TD { "d" }
+          }
+          TR {
+            TD { "Adoption" }
+            TD { "b" }
+            TD { "c" }
+            TD { "d" }
+          }
+          TR {
+            TD { "Retention" }
+            TD { "b" }
+            TD { "c" }
+            TD { "d" }
+          }
+          TR {
+            TD { "Task Success" }
+            TD { "b" }
+            TD { "c" }
+            TD { "d" }
+          }
+        }
+      }
+
+
     end
 
     def modal_footer
