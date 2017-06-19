@@ -30,17 +30,16 @@ module Probes
     end
 
     def summary_card
-      DIV(class: 'card shadow cursor-pointer') {
-        DIV(class: 'card-block') {
-          DIV(class: 'card-title') {
-            H4(class: "card-title link") {
+      Card(class: 'shadow cursor-pointer') {
+        CardBlock {
+          CardTitle {
+            SPAN(class: 'link') {
               ProbeIcon()
-              SPAN {" "}
-              params.probe.name
+              SPAN { " #{params.probe.name}" }
             }
           }
-          DIV(class: 'card-text') {
-            P {"Body" }
+          CardText {
+            "Body"
           }
         }
       }
