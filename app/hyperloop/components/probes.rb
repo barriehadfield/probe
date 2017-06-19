@@ -48,7 +48,7 @@ module Probes
 
     def input_inplace field, args = {}
       if state.edit_mode
-        INPUT({}.merge(args)).on(:change) do |e|
+        Input( {type: 'text'}.merge(args) ).on(:change) do |e|
           params.probe[field.to_s] = e.target.value
           mutate.dirty true
         end
@@ -65,17 +65,13 @@ module Probes
     def modal
       Modal(isOpen: state.show_modal, class: "modal-xl", toggle: lambda { close }) {
         ModalHeader {
-          H4 {
-            SPAN { "Probe # #{params.probe.id} " }
-          }
+          SPAN { "Probe # #{params.probe.id} " }
         }
         ModalBody {
-          P {
-            input_inplace :name, { placeholder: "Name" }
-            Row {
-              Col(md: 6) { "xxx" }
-              Col(md: 6) { "yyy" }
-            }
+          input_inplace :name, { placeholder: "Probe Name" }
+          Row {
+            Col(md: 6) { "xxx" }
+            Col(md: 6) { "yyy" }
           }
         }
         ModalFooter {
