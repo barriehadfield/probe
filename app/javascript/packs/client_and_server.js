@@ -16,6 +16,13 @@ DropdownItem = require('reactstrap').DropdownItem;
 
 Form = require('reactstrap').Form;
 FormGroup = require('reactstrap').FormGroup;
+FormText = require('reactstrap').FormText;
+
 Label = require('reactstrap').Label;
 Input = require('reactstrap').Input;
-FormText = require('reactstrap').FormText;
+InputGroup = require('reactstrap').InputGroup;
+InputGroupAddon = require('reactstrap').InputGroupAddon;
+
+Container = require('reactstrap').Container;
+Row = require('reactstrap').Row;
+Col = require('reactstrap').Col;

@@ -63,15 +63,19 @@ module Probes
     end
 
     def modal
-      Modal(isOpen: state.show_modal, class: "modal-xl", onHide: lambda { close }) {
-        ModalHeader(toggle: lambda { close }) {
+      Modal(isOpen: state.show_modal, class: "modal-xl", toggle: lambda { close }) {
+        ModalHeader {
           H4 {
-            input_inplace :name, { placeholder: "Name" }
+            SPAN { "Probe # #{params.probe.id} " }
           }
         }
         ModalBody {
           P {
-            "body"
+            input_inplace :name, { placeholder: "Name" }
+            Row {
+              Col(md: 6) { "xxx" }
+              Col(md: 6) { "yyy" }
+            }
           }
         }
         ModalFooter {
@@ -81,24 +85,22 @@ module Probes
     end
 
     def modal_footer
-      ButtonDropdown(class:'button-space',
-          color: 'primary',
-          isOpen: (state.is_open || false),
-          toggle: lambda { mutate.is_open !state.is_open }) {
-        DropdownToggle(caret: true) {
-          SettingsIcon()
-        }
-        DropdownMenu {
-          DropdownItem { "Edit"}
-          DropdownItem { "Delete"}
-        }
+      ButtonDropdown(
+        color: 'primary',
+        isOpen: (state.is_open || false),
+        toggle: -> { mutate.is_open !state.is_open }) {
+          DropdownToggle(caret: true) { SettingsIcon() }
+          DropdownMenu {
+            DropdownItem(onClick: lambda { edit }) { "Edit"}
+            DropdownItem { "Delete"}
+          }
       }
-      if state.dirty
-        BUTTON(class: 'btn btn-success') { "Save" }.on(:click) { save }
-        BUTTON(class: 'btn btn-secondary') { "Cancel" }.on(:click) { close }
-      else
-        BUTTON(class: 'btn btn-secondary') { "Close" }.on(:click) { close }
-      end
+      Button(color: 'success', onClick: -> { save }) { SaveIcon() }
+      Button(color: 'secondary', onClick: -> { close }) { CloseIcon() }
+    end
+
+    def edit
+      mutate.edit_mode true
     end
 
     def close
