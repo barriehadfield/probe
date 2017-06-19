@@ -3,11 +3,11 @@ module Home
     render(DIV) do
       DIV(class: 'container-fluid outer') {
         BR()
-        DIV(class: 'row') {
-          DIV(class: 'col-md-3') {
+        Row {
+          Col(md: 3) {
             Filters()
           }
-          DIV(class: 'col-md-9') {
+          Col(md: 9) {
             Cards()
           }
         }
@@ -16,16 +16,6 @@ module Home
   end
 
   class Filters < Hyperloop::Component
-
-    # state is_open: false
-
-    # before_mount do
-    #   mutate.is_open false
-    # end
-    #
-    # def toggle
-    #   mutate.is_open !state.is_open
-    # end
 
     render(DIV) do
       DIV(class: 'card shadow') {
