@@ -60,10 +60,10 @@ module Probes
     def modal
       Modal(isOpen: state.show_modal, class: "modal-xl", toggle: lambda { close }) {
         ModalHeader(toggle: -> { close }) {
-          SPAN { "Probe # #{params.probe.id} " }
+          params.probe.name || "New Probe"
         }
         ModalBody {
-          H2 { input_inplace :name, { placeholder: "Probe Name" } }
+          input_inplace :name, { placeholder: "Probe Name" } if state.edit_mode
           Row {
             Col(md: 6) { "xxx" }
             Col(md: 6) { "yyy" }
@@ -96,7 +96,7 @@ module Probes
 
     def reset
       params.probe.revert if state.dirty
-      mutate.edit_mode false
+      mutate.edit_mode false unless params.new_probe
       mutate.dirty false
     end
 
