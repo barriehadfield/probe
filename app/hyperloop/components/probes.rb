@@ -48,7 +48,7 @@ module Probes
 
     def input_inplace field, args = {}
       if state.edit_mode
-        Input( {type: 'text'}.merge(args) ).on(:change) do |e|
+        Input( { type: 'text', defaultValue: params.probe.send(field) }.merge(args) ).on(:change) do |e|
           params.probe[field.to_s] = e.target.value
           mutate.dirty true
         end
@@ -60,6 +60,7 @@ module Probes
     def save
       params.probe.save
       mutate.dirty false
+      close
     end
 
     def modal
