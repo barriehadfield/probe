@@ -57,19 +57,13 @@ module Probes
       end
     end
 
-    def save
-      params.probe.save
-      mutate.dirty false
-      close
-    end
-
     def modal
       Modal(isOpen: state.show_modal, class: "modal-xl", toggle: lambda { close }) {
-        ModalHeader {
+        ModalHeader(toggle: -> { close }) {
           SPAN { "Probe # #{params.probe.id} " }
         }
         ModalBody {
-          input_inplace :name, { placeholder: "Probe Name" }
+          H2 { input_inplace :name, { placeholder: "Probe Name" } }
           Row {
             Col(md: 6) { "xxx" }
             Col(md: 6) { "yyy" }
@@ -92,17 +86,31 @@ module Probes
             DropdownItem { "Delete"}
           }
       }
-      Button(color: 'success', onClick: -> { save }) { SaveIcon() }
-      Button(color: 'secondary', onClick: -> { close }) { CloseIcon() }
+      Button(color: 'success', onClick: -> { save }) { SaveIcon() } if state.dirty
+      # Button(color: 'secondary', onClick: -> { close }) { CloseIcon() }
     end
 
     def edit
       mutate.edit_mode true
     end
 
+    def reset
+      params.probe.revert if state.dirty
+      mutate.edit_mode false
+      mutate.dirty false
+    end
+
     def close
+      reset
       mutate.show_modal false
     end
+
+    def save
+      params.probe.save
+      mutate.dirty false
+      close
+    end
+
   end
 
 end
