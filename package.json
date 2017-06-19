@@ -29,6 +29,7 @@
     "rails-erb-loader": "^5.0.1",
     "react-addons-css-transition-group": "^15.6.0",
     "react-addons-transition-group": "^15.6.0",
+    "react-timeago": "3.2.1",
     "reactstrap": "^4.6.2",
     "resolve-url-loader": "^2.0.2",
     "sass-loader": "^6.0.5",

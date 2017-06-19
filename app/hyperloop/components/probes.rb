@@ -39,7 +39,8 @@ module Probes
             }
           }
           CardText {
-            "Body"
+            SPAN {"Created: "}
+            SafeTimeAgo(date: params.probe.created_at )
           }
         }
       }
@@ -80,21 +81,17 @@ module Probes
       end
       Button(color: 'success', onClick: -> { save }) { SaveIcon() } if state.dirty
       UncontrolledDropdown( color: 'primary') {
-          DropdownToggle(caret: true) { SettingsIcon() }
-          DropdownMenu {
-            DropdownItem(onClick: -> { edit }) { "Edit"}
-            DropdownItem(onClick: -> { mutate.should_delete true }) { "Delete"}
-          }
+        DropdownToggle(caret: true) { SettingsIcon() }
+        DropdownMenu {
+          DropdownItem(onClick: -> { mutate.edit_mode true }) { "Edit"}
+          DropdownItem(onClick: -> { mutate.should_delete true }) { "Delete"}
+        }
       }
     end
 
     def delete
       params.probe.destroy
       close
-    end
-
-    def edit
-      mutate.edit_mode true
     end
 
     def reset

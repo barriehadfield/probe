@@ -1,6 +1,8 @@
 ReactDOM = require('react-dom');
 React = require('react');
 
+TimeAgo = require('react-timeago').default;
+
 Modal = require('reactstrap').Modal;
 ModalHeader = require('reactstrap').ModalHeader;
 ModalBody = require('reactstrap').ModalBody;
