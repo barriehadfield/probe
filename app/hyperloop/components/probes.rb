@@ -57,7 +57,7 @@ module Probes
     end
 
     def modal
-      Modal(isOpen: state.show_modal, class: "modal-xl", toggle: lambda { close }) {
+      Modal(isOpen: state.show_modal, class: "modal-xl", toggle: -> { close }) {
         ModalHeader(toggle: -> { close }) {
           params.probe.name || "New Probe"
         }
@@ -75,18 +75,22 @@ module Probes
     end
 
     def modal_footer
-      ButtonDropdown(
-        color: 'primary',
-        isOpen: (state.is_open || false),
-        toggle: -> { mutate.is_open !state.is_open }) {
+      if state.should_delete
+        Button(color: 'danger', size: 'sm', onClick: -> { delete }) { "Confirm Delete" }
+      end
+      Button(color: 'success', onClick: -> { save }) { SaveIcon() } if state.dirty
+      UncontrolledDropdown( color: 'primary') {
           DropdownToggle(caret: true) { SettingsIcon() }
           DropdownMenu {
-            DropdownItem(onClick: lambda { edit }) { "Edit"}
-            DropdownItem { "Delete"}
+            DropdownItem(onClick: -> { edit }) { "Edit"}
+            DropdownItem(onClick: -> { mutate.should_delete true }) { "Delete"}
           }
       }
-      Button(color: 'success', onClick: -> { save }) { SaveIcon() } if state.dirty
-      # Button(color: 'secondary', onClick: -> { close }) { CloseIcon() }
+    end
+
+    def delete
+      params.probe.destroy
+      close
     end
 
     def edit
@@ -97,6 +101,7 @@ module Probes
       params.probe.revert if state.dirty
       mutate.edit_mode false unless params.new_probe
       mutate.dirty false
+      mutate.should_delete false
     end
 
     def close
