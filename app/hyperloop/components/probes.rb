@@ -15,7 +15,7 @@ module Probes
 
     render(DIV) do
       if params.new_probe
-        BUTTON(class: "btn btn-primary") {
+        Button(color: "primary") {
           ProbeIcon()
           " New Probe"
         }.on(:click) do
