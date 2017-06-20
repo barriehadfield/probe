@@ -72,24 +72,15 @@ module Probes
     end
 
     def modal_body
-
       if state.edit_mode
-        input_inplace :name, { placeholder: "Probe Name", type: :textarea}
+        input_inplace :name, { placeholder: "Probe Name", type: :text}
         BR()
       end
 
       H6 { input_inplace :description, { placeholder: "Description", type: :textarea } }
       BR()
-      
-      Nav(tabs: true) {
-        NavItem {
-          NavLink( active: true ) { "H.E.A.R.T"}
-        }
-        NavItem {
-          NavLink( active: false ) { "Config"}
-        }
-      }
 
+      HeartTabs(probe: params.probe)
     end
 
     def modal_footer
@@ -173,6 +164,47 @@ module Probes
       mutate.dirty false
       mutate.edit_mode false
       # close
+    end
+
+  end
+
+  class HeartTabs < Hyperloop::Component
+
+    param :probe
+
+    before_mount do
+      mutate.active_tab 1
+    end
+
+    render(DIV) do
+      tabs
+      tab_content
+    end
+
+    def tabs
+      Nav(tabs: true) {
+        NavItem {
+          NavLink( class: 'cursor-pointer', active: state.active_tab == 1, onClick: -> { mutate.active_tab 1 } ) {
+            "H.E.A.R.T"
+          }
+        }
+        NavItem {
+          NavLink( class: 'cursor-pointer', active: state.active_tab == 2, onClick: -> { mutate.active_tab 2 } ) {
+            "Config"
+          }
+        }
+      }
+    end
+
+    def tab_content
+      TabContent(activeTab: state.active_tab) {
+        TabPane(tabId: 1) {
+          "One"
+        }
+        TabPane(tabId: 2) {
+          "Two"
+        }
+      }
     end
 
   end
