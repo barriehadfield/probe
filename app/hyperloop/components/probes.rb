@@ -97,51 +97,6 @@ module Probes
       }
     end
 
-    def heart_table
-      TABLE(class: 'table table-bordered') {
-        THEAD {
-          TR {
-            TH { "" }
-            TH { "Goal" }
-            TH { "Signals" }
-            TH { "Metrics" }
-          }
-        }
-        TBODY {
-          TR {
-            TD { "Happiness" }
-            TD { "b" }
-            TD { "c" }
-            TD { "d" }
-          }
-          TR {
-            TD { "Engagement" }
-            TD { "b" }
-            TD { "c" }
-            TD { "d" }
-          }
-          TR {
-            TD { "Adoption" }
-            TD { "b" }
-            TD { "c" }
-            TD { "d" }
-          }
-          TR {
-            TD { "Retention" }
-            TD { "b" }
-            TD { "c" }
-            TD { "d" }
-          }
-          TR {
-            TD { "Task Success" }
-            TD { "b" }
-            TD { "c" }
-            TD { "d" }
-          }
-        }
-      }
-    end
-
     def delete
       params.probe.destroy
       close
@@ -202,7 +157,54 @@ module Probes
           "One"
         }
         TabPane(tabId: 2) {
-          "Two"
+          config_tab
+        }
+      }
+    end
+
+    def config_tab
+      BR()
+      P { "Select the items you would like to track." }
+      TABLE(class: 'table table-bordered') {
+        THEAD {
+          TR {
+            TH { "" }
+            TH { "Goal" }
+            TH { "Signals" }
+            TH { "Metrics" }
+          }
+        }
+        TBODY {
+          TR {
+            TD { "Happiness" }
+            TD { Button(size: :sm) {"Enabled"} }
+            TD { "c" }
+            TD { "d" }
+          }
+          TR {
+            TD { "Engagement" }
+            TD { "b" }
+            TD { "c" }
+            TD { "d" }
+          }
+          TR {
+            TD { "Adoption" }
+            TD { "b" }
+            TD { "c" }
+            TD { "d" }
+          }
+          TR {
+            TD { "Retention" }
+            TD { "b" }
+            TD { "c" }
+            TD { "d" }
+          }
+          TR {
+            TD { "Task Success" }
+            TD { "b" }
+            TD { "c" }
+            TD { "d" }
+          }
         }
       }
     end
