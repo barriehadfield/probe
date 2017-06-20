@@ -48,7 +48,7 @@ module Probes
 
     def input_inplace field, args = {}
       if state.edit_mode
-        Input( { type: 'text', defaultValue: params.probe.send(field) }.merge(args) ).on(:change) do |e|
+        Input( { defaultValue: params.probe.send(field) }.merge(args) ).on(:change) do |e|
           params.probe[field.to_s] = e.target.value
           mutate.dirty true
         end
@@ -72,7 +72,41 @@ module Probes
     end
 
     def modal_body
-      input_inplace :name, { placeholder: "Probe Name" } if state.edit_mode
+
+      if state.edit_mode
+        input_inplace :name, { placeholder: "Probe Name", type: :textarea}
+        BR()
+      end
+
+      H6 { input_inplace :description, { placeholder: "Description", type: :textarea } }
+      BR()
+      
+      Nav(tabs: true) {
+        NavItem {
+          NavLink( active: true ) { "H.E.A.R.T"}
+        }
+        NavItem {
+          NavLink( active: false ) { "Config"}
+        }
+      }
+
+    end
+
+    def modal_footer
+      if state.should_delete
+        Button(color: 'danger', size: 'sm', onClick: -> { delete }) { "Confirm Delete" }
+      end
+      Button(color: 'success', onClick: -> { save }) { SaveIcon() } if state.dirty
+      UncontrolledDropdown( color: 'primary') {
+        DropdownToggle(caret: true) { SettingsIcon() }
+        DropdownMenu {
+          DropdownItem(onClick: -> { mutate.edit_mode true }) { "Edit"}
+          DropdownItem(onClick: -> { mutate.should_delete true }) { "Delete"}
+        }
+      }
+    end
+
+    def heart_table
       TABLE(class: 'table table-bordered') {
         THEAD {
           TR {
@@ -115,22 +149,6 @@ module Probes
           }
         }
       }
-
-
-    end
-
-    def modal_footer
-      if state.should_delete
-        Button(color: 'danger', size: 'sm', onClick: -> { delete }) { "Confirm Delete" }
-      end
-      Button(color: 'success', onClick: -> { save }) { SaveIcon() } if state.dirty
-      UncontrolledDropdown( color: 'primary') {
-        DropdownToggle(caret: true) { SettingsIcon() }
-        DropdownMenu {
-          DropdownItem(onClick: -> { mutate.edit_mode true }) { "Edit"}
-          DropdownItem(onClick: -> { mutate.should_delete true }) { "Delete"}
-        }
-      }
     end
 
     def delete
@@ -153,7 +171,8 @@ module Probes
     def save
       params.probe.save
       mutate.dirty false
-      close
+      mutate.edit_mode false
+      # close
     end
 
   end

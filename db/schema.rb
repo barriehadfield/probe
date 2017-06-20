@@ -10,12 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170614054211) do
+ActiveRecord::Schema.define(version: 20170620005652) do
+
+  create_table "hyperloop_connections", force: :cascade do |t|
+    t.string "channel"
+    t.string "session"
+    t.datetime "created_at"
+    t.datetime "expires_at"
+    t.datetime "refresh_at"
+  end
+
+  create_table "hyperloop_queued_messages", force: :cascade do |t|
+    t.text "data"
+    t.integer "connection_id"
+  end
 
   create_table "probes", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
     t.index ["id"], name: "index_probes_on_id"
   end
 

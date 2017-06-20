@@ -40,3 +40,10 @@ CardSubtitle = require('reactstrap').CardSubtitle;
 CardFooter = require('reactstrap').CardFooter;
 CardDeck = require('reactstrap').CardDeck;
 CardColumns = require('reactstrap').CardColumns;
+
+TabContent = require('reactstrap').TabContent;
+TabPane = require('reactstrap').TabPane;
+
+Nav = require('reactstrap').Nav;
+NavItem = require('reactstrap').NavItem;
+NavLink = require('reactstrap').NavLink;
