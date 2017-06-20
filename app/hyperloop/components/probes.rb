@@ -11,6 +11,7 @@ module Probes
 
     before_mount do
       mutate.edit_mode (params.new_probe ? true : false)
+      mutate.active_tab 1
     end
 
     render(DIV) do
@@ -27,74 +28,6 @@ module Probes
         end
       end
       modal if state.show_modal
-    end
-
-    def summary_card
-      Card(class: 'shadow cursor-pointer') {
-        CardBlock {
-          CardTitle {
-            SPAN(class: 'link') {
-              ProbeIcon()
-              SPAN { " #{params.probe.name}" }
-            }
-          }
-          CardText {
-            SPAN {"Created: "}
-            SafeTimeAgo(date: params.probe.created_at )
-          }
-        }
-      }
-    end
-
-    def input_inplace field, args = {}
-      if state.edit_mode
-        Input( { defaultValue: params.probe.send(field) }.merge(args) ).on(:change) do |e|
-          params.probe[field.to_s] = e.target.value
-          mutate.dirty true
-        end
-      else
-        SPAN { params.probe.send(field) }
-      end
-    end
-
-    def modal
-      Modal(isOpen: state.show_modal, class: "modal-xl", toggle: -> { close }) {
-        ModalHeader(toggle: -> { close }) {
-          params.probe.name || "New Probe"
-        }
-        ModalBody {
-          modal_body
-        }
-        ModalFooter {
-          modal_footer
-        }
-      }
-    end
-
-    def modal_body
-      if state.edit_mode
-        input_inplace :name, { placeholder: "Probe Name", type: :text}
-        BR()
-      end
-
-      H6 { input_inplace :description, { placeholder: "Description", type: :textarea } }
-      BR()
-
-      HeartTabs(probe: params.probe)
-    end
-
-    def modal_footer
-      if state.should_delete
-        Button(color: 'danger', size: 'sm', onClick: -> { delete }) { "Confirm Delete" }
-      end
-      Button(color: 'success', onClick: -> { save }) { SaveIcon() } if state.dirty
-      UncontrolledDropdown( color: 'primary') {
-        DropdownToggle(caret: true) { SettingsIcon() }
-        DropdownMenu {
-          DropdownItem(onClick: -> { mutate.edit_mode true }) { "Edit"}
-          DropdownItem(onClick: -> { mutate.should_delete true }) { "Delete"}
-        }
-      }
     end
 
     def delete
@@ -121,19 +54,65 @@ module Probes
       # close
     end
 
-  end
-
-  class HeartTabs < Hyperloop::Component
-
-    param :probe
-
-    before_mount do
-      mutate.active_tab 1
+    def summary_card
+      Card(class: 'shadow cursor-pointer') {
+        CardBlock {
+          CardTitle {
+            SPAN(class: 'link') {
+              ProbeIcon()
+              SPAN { " #{params.probe.name}" }
+            }
+          }
+          CardText {
+            SPAN {"Created: "}
+            SafeTimeAgo(date: params.probe.created_at )
+          }
+        }
+      }
     end
 
-    render(DIV) do
+    def modal
+      Modal(isOpen: state.show_modal, class: "modal-xl", toggle: -> { close }) {
+        ModalHeader(toggle: -> { close }) {
+          params.probe.name || "New Probe"
+        }
+        ModalBody {
+          modal_body
+        }
+        ModalFooter {
+          modal_footer
+        }
+      }
+    end
+
+    def modal_body
       tabs
       tab_content
+    end
+
+    def modal_footer
+      if state.should_delete
+        Button(color: 'danger', size: 'sm', onClick: -> { delete }) { "Confirm Delete" }
+      end
+      Button(color: 'success', onClick: -> { save }) { SaveIcon() } if state.dirty
+      UncontrolledDropdown( color: 'primary') {
+        DropdownToggle(caret: true) { SettingsIcon() }
+        DropdownMenu {
+          DropdownItem(onClick: -> { mutate.edit_mode true }) { "Edit"}
+          DropdownItem(onClick: -> { mutate.should_delete true }) { "Delete"}
+        }
+      }
+    end
+
+    def input_inplace field, args = {}
+      if state.edit_mode
+        Input( { defaultValue: params.probe.send(field) }.merge(args) ).on(:change) do |e|
+          params.probe[field.to_s] = e.target.value
+          mutate.dirty true
+        end
+      else
+        Input( {defaultValue: params.probe.send(field), readOnly: true}.merge(args) )
+      end
     end
 
     def tabs
@@ -154,12 +133,53 @@ module Probes
     def tab_content
       TabContent(activeTab: state.active_tab) {
         TabPane(tabId: 1) {
-          "One"
+          heart_tab
         }
         TabPane(tabId: 2) {
           config_tab
         }
       }
+    end
+
+    def heart_tab
+      BR()
+      # if state.edit_mode
+        Label { "Name" }
+        input_inplace :name, { placeholder: "Probe Name", type: :text}
+        BR()
+      # end
+
+      Label { "Description" }
+      input_inplace :description, { placeholder: "Description", type: :textarea }
+      BR()
+
+      H4 { "Happiness" }
+      Row {
+        Col {
+          Label { "Goals" }
+          input_inplace :happiness_goals, { placeholder: "Goals", type: :textarea }
+        }
+      }
+      BR()
+      Row {
+        Col {
+          Label { "Signals" }
+          input_inplace :happiness_signals, { placeholder: "Signals", type: :textarea }
+        }
+        Col {
+          Label { "Metrics" }
+          input_inplace :happiness_metrics, { placeholder: "Metrics", type: :textarea }
+        }
+      }
+
+      BR()
+      BR()
+
+      H4 { "Enagement" }
+      H4 { "Adoption" }
+      H4 { "Retention" }
+      H4 { "Task Success" }
+
     end
 
     def config_tab
