@@ -104,14 +104,16 @@ module Probes
       }
     end
 
-    def input_inplace field, args = {}
+    def input_inplace field, label = nil, args = {}
       if state.edit_mode
+        Label { label } if label
         Input( { defaultValue: params.probe.send(field) }.merge(args) ).on(:change) do |e|
           params.probe[field.to_s] = e.target.value
           mutate.dirty true
         end
       else
-        Input( {defaultValue: params.probe.send(field), readOnly: true}.merge(args) )
+        P { label } if label
+        P { params.probe.send(field) }
       end
     end
 
@@ -143,42 +145,36 @@ module Probes
 
     def heart_tab
       BR()
-      # if state.edit_mode
-        Label { "Name" }
-        input_inplace :name, { placeholder: "Probe Name", type: :text}
-        BR()
-      # end
+      input_inplace :name, "Name", { placeholder: "Probe Name", type: :text}
+      BR()
 
-      Label { "Description" }
-      input_inplace :description, { placeholder: "Description", type: :textarea }
+      input_inplace :description, "Description", { placeholder: "Description", type: :textarea }
       BR()
 
       H4 { "Happiness" }
       Row {
         Col {
-          Label { "Goals" }
-          input_inplace :happiness_goals, { placeholder: "Goals", type: :textarea }
+          input_inplace :happiness_goals, "Goals", { placeholder: "Goals", type: :textarea }
         }
       }
       BR()
+
       Row {
         Col {
-          Label { "Signals" }
-          input_inplace :happiness_signals, { placeholder: "Signals", type: :textarea }
+          input_inplace :happiness_signals, "Signals" , { placeholder: "Signals", type: :textarea }
         }
         Col {
-          Label { "Metrics" }
-          input_inplace :happiness_metrics, { placeholder: "Metrics", type: :textarea }
+          input_inplace :happiness_metrics, "Metrics", { placeholder: "Metrics", type: :textarea }
         }
       }
 
-      BR()
-      BR()
-
-      H4 { "Enagement" }
-      H4 { "Adoption" }
-      H4 { "Retention" }
-      H4 { "Task Success" }
+      # BR()
+      # BR()
+      #
+      # H4 { "Enagement" }
+      # H4 { "Adoption" }
+      # H4 { "Retention" }
+      # H4 { "Task Success" }
 
     end
 
