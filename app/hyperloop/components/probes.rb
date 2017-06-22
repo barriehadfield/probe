@@ -7,7 +7,7 @@ module Probes
 
     state show_modal: false
     state edit_mode: false
-    state dirty: false
+    # state dirty: false
 
     before_mount do
       mutate.edit_mode (params.new_probe ? true : false)
@@ -36,9 +36,9 @@ module Probes
     end
 
     def reset
-      params.probe.revert if state.dirty
+      params.probe.revert if params.probe.changed?
       mutate.edit_mode false unless params.new_probe
-      mutate.dirty false
+      # mutate.dirty false
       mutate.should_delete false
     end
 
@@ -49,7 +49,7 @@ module Probes
 
     def save
       params.probe.save
-      mutate.dirty false
+      # mutate.dirty false
       mutate.edit_mode false
       # close
     end
@@ -94,7 +94,8 @@ module Probes
       if state.should_delete
         Button(color: 'danger', size: 'sm', onClick: -> { delete }) { "Confirm Delete" }
       end
-      Button(color: 'success', onClick: -> { save }) { SaveIcon() } if state.dirty
+      mutate.show_save params.probe.changed?
+      Button(color: 'success', onClick: -> { save }) { SaveIcon() } if state.show_save
       UncontrolledDropdown( color: 'primary') {
         DropdownToggle(caret: true) { SettingsIcon() }
         DropdownMenu {
@@ -104,18 +105,18 @@ module Probes
       }
     end
 
-    def input_inplace field, label = nil, args = {}
-      if state.edit_mode
-        Label { label } if label
-        Input( { defaultValue: params.probe.send(field) }.merge(args) ).on(:change) do |e|
-          params.probe[field.to_s] = e.target.value
-          mutate.dirty true
-        end
-      else
-        P { label } if label
-        P { params.probe.send(field) }
-      end
-    end
+    # def input_inplace field, label = nil, args = {}
+    #   if state.edit_mode
+    #     Label { label } if label
+    #     Input( { defaultValue: params.probe.send(field) }.merge(args) ).on(:change) do |e|
+    #       params.probe[field.to_s] = e.target.value
+    #       # mutate.dirty true
+    #     end
+    #   else
+    #     P { label } if label
+    #     P { params.probe.send(field) }
+    #   end
+    # end
 
     def tabs
       Nav(tabs: true) {
@@ -145,26 +146,29 @@ module Probes
 
     def heart_tab
       BR()
-      input_inplace :name, "Name", { placeholder: "Probe Name", type: :text}
-      BR()
+      InputInplace(field: :name, model: params.probe, label: "Name",
+        args: { placeholder: "Probe Name", type: :text}, edit_mode: state.edit_mode)
 
-      input_inplace :description, "Description", { placeholder: "Description", type: :textarea }
-      BR()
+      InputInplace(field: :description, model: params.probe, label: "Description",
+        args: { placeholder: "Description", type: :textarea }, edit_mode: state.edit_mode)
 
-      H4 { "Happiness" }
+      H3 { "Happiness" }
       Row {
         Col {
-          input_inplace :happiness_goals, "Goals", { placeholder: "Goals", type: :textarea }
+          InputInplace(field: :happiness_goals, model: params.probe, label: "Goals",
+            args: { placeholder: "Goals", type: :textarea }, edit_mode: state.edit_mode)
         }
       }
       BR()
 
       Row {
         Col {
-          input_inplace :happiness_signals, "Signals" , { placeholder: "Signals", type: :textarea }
+          InputInplace(field: :happiness_signals, model: params.probe, label: "Signals",
+            args: { placeholder: "Signals", type: :textarea }, edit_mode: state.edit_mode)
         }
         Col {
-          input_inplace :happiness_metrics, "Metrics", { placeholder: "Metrics", type: :textarea }
+          InputInplace(field: :happiness_metrics, model: params.probe, label: "Metrics",
+            args: { placeholder: "Metrics", type: :textarea }, edit_mode: state.edit_mode)
         }
       }
 
