@@ -1,17 +1,21 @@
 module Home
   class Page < Hyperloop::Component
 
+    before_mount do
+      mutate.show_drawer true
+    end
+
     render do
-      Mat.MuiThemeProvider {
+      Mui.MuiThemeProvider {
       DIV {
-        Mat.AppBar(className: "app-bar #{is_expanded}", title: 'Probe', onLeftIconButtonTouchTap: -> { toggle_drawer } )
-        Mat.Drawer(open: state.show_drawer || false) {
-          Mat.MenuItem { "The big one" }
-          Mat.MenuItem { "And the next" }
-          Mat.FlatButton(label: 'New Probe', primary: true, onClick: -> { alert "click click" })
+        Mui.AppBar(className: "app-bar #{is_expanded}", title: 'Probe', onLeftIconButtonTouchTap: -> { toggle_drawer } )
+        Mui.Drawer(open: state.show_drawer ) {
+          Mui.MenuItem { "The big one" }
+          Mui.MenuItem { "And the next" }
+          Mui.FlatButton(label: 'New Probe', primary: true, onClick: -> { alert "click click" })
         }
         DIV(class: "app-content #{is_expanded}") {
-          # Mat.FlatButton(label: 'New Probe', primary: true, onClick: -> { alert "click click" })
+          # Mui.FlatButton(label: 'New Probe', primary: true, onClick: -> { alert "click click" })
           H1(class: 'mdc-typography--display1') { "Big?" }
           ProbeCards()
         }
