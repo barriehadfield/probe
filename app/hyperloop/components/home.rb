@@ -2,12 +2,21 @@ module Home
   class Page < Hyperloop::Component
 
     render do
-      DIV {
-        P "Hello"
-        MaterialUi.MuiThemeProvider {
-          DIV {
-            MaterialUi.AppBar(title: 'Hello App' )
-            MaterialUi.FlatButton(label: 'Press me', secondary: true, onClick: -> { alert "click click" })
+      Mat.MuiThemeProvider {
+        DIV {
+          DIV(class: '') {
+            Mat.Drawer(open: state.show_drawer || false) {
+              Mat.MenuItem { "Close" }.on(:click) { mutate.show_drawer false }
+              Mat.MenuItem { "The big one" }
+              Mat.MenuItem { "And the next" }
+              Mat.FlatButton(label: 'New Probe', primary: true, onClick: -> { alert "click click" })
+            }
+          }
+          DIV(class: '') {
+            Mat.AppBar(className: 'app-bar', title: 'Probe', onLeftIconButtonTouchTap: -> { mutate.show_drawer true } )
+            # Mat.FlatButton(label: 'New Probe', primary: true, onClick: -> { alert "click click" })
+            H1(class: 'mdc-typography--display1') { "Big?" }
+            ProbeCards()
           }
         }
       }
@@ -40,7 +49,7 @@ module Home
   class ProbeCards < Hyperloop::Component
     render(DIV) do
       Probe.reverse.each do |probe|
-        # Probes::Item(probe: probe)
+        Probes::Item(probe: probe)
       end
     end
   end
