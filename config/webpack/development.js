@@ -15,10 +15,10 @@ module.exports = merge(sharedConfig, {
     pathinfo: true
   },
 
-  externals: {
-       "react": "React",
-       "react-dom": "ReactDOM"
-   },
+  // externals: {
+  //      "react": "React",
+  //      "react-dom": "ReactDOM"
+  //  },
 
   devServer: {
     clientLogLevel: 'none',
