@@ -1,6 +1,7 @@
 module Home
   class Page < Hyperloop::Component
     include MuiTools
+    include GridTools
 
     before_mount do
       mutate.show_drawer true
@@ -9,19 +10,31 @@ module Home
     render do
       Mui.MuiThemeProvider {
       DIV {
-        Mui.AppBar(className: "app-bar #{is_expanded}", title: 'Probe', onLeftIconButtonTouchTap: -> { toggle_drawer } )
-        Mui.Drawer(open: state.show_drawer ) {
-          Mui.MenuItem { "The big one" }
-          Mui.MenuItem { "And the next" }
-          Mui.FlatButton(label: 'New Probe', primary: true, onClick: -> { alert "click click" })
-        }
+        app_bar
         DIV(class: "app-content #{is_expanded}") {
           # Mui.FlatButton(label: 'New Probe', primary: true, onClick: -> { alert "click click" })
-          Display1 { "Big?" }
+          # Display1 { "Big?" }
           ProbeCards()
         }
       }
     }
+    end
+
+    def app_bar
+      Mui.AppBar(className: "app-bar #{is_expanded}", title: 'Probe', onLeftIconButtonTouchTap: -> { toggle_drawer } )
+      Mui.Drawer(open: state.show_drawer ) {
+        BR()
+        Grid(gutters: true) {
+          Cell(text: :center, gutters: true) { IMG(src: 'robot.png', width: '150px') }
+        }
+        Grid {
+          Cell(text: :center) {
+              Mui.FlatButton(label: 'New Probe', primary: true, onClick: -> { alert "click click" })
+          }
+        }
+
+        Mui.MenuItem { "And the next" }
+      }
     end
 
     def toggle_drawer

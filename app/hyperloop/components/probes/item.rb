@@ -22,11 +22,12 @@ module Probes
           Body1 { "I am the first of the body text" }
           Body2 { "I am the next of the body text" }
           Caption { "Some caption" }
+          BR()
 
-          Grid {
-            Cell { "time for some eggs" }
-            Cell { "2" }
-            Cell { Headline {"henri is going to wake soon"} }
+          Grid(gutters: true) {
+            Cell { SPAN(class: 'red') {"time for some eggs"} }
+            Cell { SPAN(class: 'red') {"2"} }
+            Cell { SPAN(class: 'red') {"henri will wake soon"} }
           }
 
 
