@@ -1,5 +1,6 @@
 module Home
   class Page < Hyperloop::Component
+    include MuiTools
 
     before_mount do
       mutate.show_drawer true
@@ -16,7 +17,7 @@ module Home
         }
         DIV(class: "app-content #{is_expanded}") {
           # Mui.FlatButton(label: 'New Probe', primary: true, onClick: -> { alert "click click" })
-          H1(class: 'mdc-typography--display1') { "Big?" }
+          Display1 { "Big?" }
           ProbeCards()
         }
       }

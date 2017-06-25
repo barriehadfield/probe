@@ -1,92 +1,92 @@
-.Grid {
+.grid {
   display: flex;
 }
 
-.Grid-cell {
+.grid-cell {
   flex: 1;
 }
 
 /* With gutters */
-.Grid--gutters {
+.grid--gutters {
   margin: -1em 0 0 -1em;
 }
-.Grid--gutters > .Grid-cell {
+.grid--gutters > .grid-cell {
   padding: 1em 0 0 1em;
 }
 
 /* Alignment per row */
-.Grid--top {
+.grid--top {
   align-items: flex-start;
 }
-.Grid--bottom {
+.grid--bottom {
   align-items: flex-end;
 }
-.Grid--center {
+.grid--center {
   align-items: center;
 }
 
 /* Alignment per cell */
-.Grid-cell--top {
+.grid-cell--top {
   align-self: flex-start;
 }
-.Grid-cell--bottom {
+.grid-cell--bottom {
   align-self: flex-end;
 }
-.Grid-cell--center {
+.grid-cell--center {
   align-self: center;
 }
 
 /* Base classes for all media */
-.Grid--fit > .Grid-cell {
+.grid--fit > .grid-cell {
   flex: 1;
 }
-.Grid--full > .Grid-cell {
+.grid--full > .grid-cell {
   flex: 0 0 100%;
 }
-.Grid--1of2 > .Grid-cell {
+.grid--1of2 > .grid-cell {
   flex: 0 0 50%
 }
-.Grid--1of3 > .Grid-cell {
+.grid--1of3 > .grid-cell {
   flex: 0 0 33.3333%
 }
-.Grid--1of4 > .Grid-cell {
+.grid--1of4 > .grid-cell {
   flex: 0 0 25%
 }
 
 /* Small to medium screens */
 @media (min-width: 24em) {
-  .small-Grid--fit > .Grid-cell {
+  .small-grid--fit > .grid-cell {
     flex: 1;
   }
-  .small-Grid--full > .Grid-cell {
+  .small-grid--full > .grid-cell {
     flex: 0 0 100%;
   }
-  .small-Grid--1of2 > .Grid-cell {
+  .small-grid--1of2 > .grid-cell {
     flex: 0 0 50%
   }
-  .small-Grid--1of3 > .Grid-cell {
+  .small-grid--1of3 > .grid-cell {
     flex: 0 0 33.3333%
   }
-  .small-Grid--1of4 > .Grid-cell {
+  .small-grid--1of4 > .grid-cell {
     flex: 0 0 25%
   }
 }
 
 /* Large screens */
 @media (min-width: 48em) {
-  .large-Grid--fit > .Grid-cell {
+  .large-grid--fit > .grid-cell {
     flex: 1;
   }
-  .large-Grid--full > .Grid-cell {
+  .large-grid--full > .grid-cell {
     flex: 0 0 100%;
   }
-  .large-Grid--1of2 > .Grid-cell {
+  .large-grid--1of2 > .grid-cell {
     flex: 0 0 50%
   }
-  .large-Grid--1of3 > .Grid-cell {
+  .large-grid--1of3 > .grid-cell {
     flex: 0 0 33.3333%
   }
-  .large-Grid--1of4 > .Grid-cell {
+  .large-grid--1of4 > .grid-cell {
     flex: 0 0 25%
   }
 }

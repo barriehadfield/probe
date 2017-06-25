@@ -1,35 +1,35 @@
-# module Shared
-#   module MuiTools
-#
-#     def Display1
-#       SPAN(class: 'mdc-typography--display1') { yield }
-#     end
-#
-#     def SubHeading1
-#       SPAN(class: 'mdc-typography--subheading1') { yield }
-#     end
-#
-#   end
-#
-# end
-
 module Probes
 
   class Item < Hyperloop::Component
     include MuiTools
+    include GridTools
 
     param :probe
 
     render(DIV) do
       Mui.Card() {
         Mui.CardTitle(title: params.probe.name.to_s, showExpandableButton: true) {
-          DIV(class: 'mdc-typography--subheading1') { SafeTimeAgo(date: params.probe.created_at ) }
+          Caption { SafeTimeAgo(date: params.probe.created_at ) }
         }
         Mui.CardText(expandable: true) {
           Display1 {"hello"}
+          Headline { "Headline" }
+          Title { "Title" }
           SubHeading1 {
-            10.times do DIV {"Hello world2"} end
+            10.times do DIV {"Hello world2 from Mui"} end
           }
+          SubHeading2 { "The subheading 2" }
+          Body1 { "I am the first of the body text" }
+          Body2 { "I am the next of the body text" }
+          Caption { "Some caption" }
+
+          Grid {
+            Cell { "time for some eggs" }
+            Cell { "2" }
+            Cell { Headline {"henri is going to wake soon"} }
+          }
+
+
         }
       }
     end
