@@ -23,9 +23,9 @@ module Home
     def app_bar
       Mui.AppBar(className: "app-bar #{is_expanded}", title: 'Probe', onLeftIconButtonTouchTap: -> { toggle_drawer } )
       Mui.Drawer(open: state.show_drawer ) {
-        BR()
+        # BR()
         Grid(gutters: true) {
-          Cell(text: :center, gutters: true) { IMG(src: 'robot.png', width: '150px') }
+          Cell(text: :center, gutters: true) { IMG(src: 'robot.png', width: '200px') }
         }
         Grid {
           Cell(text: :center) {
