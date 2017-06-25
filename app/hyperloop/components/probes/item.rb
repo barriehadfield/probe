@@ -1,22 +1,28 @@
 module Probes
 
   class Item < Hyperloop::Component
+    include MuiTools
 
     param :probe
 
     render(DIV) do
-      Mat.Card() {
-        Mat.CardTitle(title: params.probe.name.to_s,
-          # subtitle: params.probe.description.to_s,
-          showExpandableButton: true
-        ) {  SafeTimeAgo(date: params.probe.created_at )
+      Mui.Card() {
+        Mui.CardTitle(title: params.probe.name.to_s, showExpandableButton: true) {
+          DIV(class: 'mdc-typography--subheading1') { SafeTimeAgo(date: params.probe.created_at ) }
+        }
+        Mui.CardText(expandable: true) {
+          Display1 {"hello"}
+          SubHeading1 {
+            10.times do DIV {"Hello world2"} end
           }
-        Mat.CardText(expandable: true) {
-          "hello"
         }
       }
     end
+
+
   end
+
+
 end
 
 # module Probes
