@@ -35,13 +35,13 @@ module Probes
       #  Icon button
       Mui.IconButton(iconClassName: 'i fa fa-heart', onClick: -> { alert "clicked" })
 
-      #  Icon menu working
-      icon_button = `React.createElement(Mui.IconButton, { iconClassName: "i fa fa-cog" });`
-      Mui.IconMenu(iconButtonElement: icon_button ) { }
-
-      # ruby - dont show the button though ?
-      button = Mui.IconButton(iconClassName: 'i fa fa-check')
-      Mui.IconMenu(iconButtonElement: button.to_n ) { }
+      #  Icon menu
+      button = Mui.IconButton(iconClassName: 'i fa fa-cog').as_node
+      Mui.IconMenu(iconButtonElement: button.to_n ) {
+        Mui.MenuItem { "Have me" }
+        Mui.MenuItem { "Or me" }
+        Mui.MenuItem { "Please take me" }
+      }
 
       #  Paper
       style = {
@@ -53,10 +53,14 @@ module Probes
       }
       Mui.Paper(style: style, zDepth: 3) { P {"Hello there"} }
 
+      # floating action button
+      Mui.FloatingActionButton { Mui.FontIcon(className: 'i fa fa-plus') }
+
       #  Divider
       Mui.Divider()
 
-
+      # Checkbox
+      Mui.Checkbox(label: "I am a checkbox")
 
     end
 
