@@ -62,6 +62,11 @@ module Probes
       # Checkbox
       Mui.Checkbox(label: "I am a checkbox")
 
+      #  Icon checkbox
+      checked = Mui.FontIcon(className: 'i fa fa-comment').as_node
+      unchecked = Mui.FontIcon(className: 'i fa fa-comment-o').as_node
+      Mui.Checkbox(checkedIcon: checked.to_n, uncheckedIcon: unchecked.to_n, label: "click me")
+
     end
 
     def icon
