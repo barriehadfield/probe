@@ -1,3 +1,5 @@
+# https://github.com/callemall/material-ui/issues/1439 - fix for styles?
+
 module Home
   class Page < Hyperloop::Component
     include MuiTools
@@ -8,6 +10,7 @@ module Home
     end
 
     render do
+      # Mui.MuiThemeProvider(muiTheme: `{muiTheme}`) {
       Mui.MuiThemeProvider {
       DIV {
         app_bar
@@ -33,7 +36,7 @@ module Home
           }
         }
 
-        Mui.MenuItem { "And the next" }
+        Mui.MenuItem { "Filters" }
       }
     end
 
