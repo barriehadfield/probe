@@ -9,32 +9,67 @@ module Probes
     render(DIV) do
       Mui.Card() {
         Mui.CardTitle(title: params.probe.name.to_s, showExpandableButton: true) {
-          Caption { SafeTimeAgo(date: params.probe.created_at ) }
+          summary
         }
         Mui.CardText(expandable: true) {
-          Display1 {"hello"}
-          Headline { "Headline" }
-          Title { "Title" }
-          SubHeading1 {
-            10.times do DIV {"Hello world2 from Mui"} end
-          }
-          SubHeading2 { "The subheading 2" }
-          Body1 { "I am the first of the body text" }
-          Body2 { "I am the next of the body text" }
-          Caption { "Some caption" }
-          BR()
-
-          Grid(gutters: true) {
-            Cell { SPAN(class: 'red') {"time for some eggs"} }
-            Cell { SPAN(class: 'red') {"2"} }
-            Cell { SPAN(class: 'red') {"henri will wake soon"} }
-          }
-
-
+          rate_card
         }
       }
     end
 
+    def summary
+      Caption { SafeTimeAgo(date: params.probe.created_at ) }
+    end
+
+    def rate_card
+      #  Grid
+      Grid {
+        Cell(text: :right) {
+          "Right aligned Cell"
+        }
+      }
+
+      # Icon
+      Mui.FontIcon(className: 'i fa fa-star', style: { marginLeft: 100 })
+
+      #  Icon button
+      Mui.IconButton(iconClassName: 'i fa fa-heart', onClick: -> { alert "clicked" })
+
+      #  Icon menu working
+      icon_button = `React.createElement(Mui.IconButton, { iconClassName: "i fa fa-cog" });`
+      Mui.IconMenu(iconButtonElement: icon_button ) { }
+
+      # ruby - dont show the button though ?
+      button = Mui.IconButton(iconClassName: 'i fa fa-check')
+      Mui.IconMenu(iconButtonElement: button.to_n ) { }
+
+      #  Paper
+      style = {
+          height: 100,
+          width: 300,
+          margin: 20,
+          textAlign: 'center',
+          display: 'inline-block'
+      }
+      Mui.Paper(style: style, zDepth: 3) { P {"Hello there"} }
+
+      #  Divider
+      Mui.Divider()
+
+
+
+    end
+
+    def icon
+      Mui.FontIcon(className: 'i fa fa-cog', style: {marginRight: 10})
+    end
+
+    def menu
+
+      Mui.IconMenu(iconButtonElement: icon ) {
+
+      }
+    end
 
   end
 
