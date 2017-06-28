@@ -12,7 +12,7 @@ module Probes
           summary
         }
         Mui.CardText(expandable: true) {
-          rate_card
+          body
         }
       }
     end
@@ -20,6 +20,70 @@ module Probes
     def summary
       Caption { SafeTimeAgo(date: params.probe.created_at ) }
     end
+
+    def body
+
+      Grid {
+        Cell { Title { "HEART" } }
+        Cell(text: :right) {
+          button = Mui.IconButton(iconClassName: 'i fa fa-cog').as_node
+          Mui.IconMenu(iconButtonElement: button.to_n ) {
+            Mui.MenuItem(onClick: -> { mutate.settings !state.settings  }) { "Settings" }
+            Mui.MenuItem { "Archive" }
+            Mui.MenuItem { "Delete" }
+          }
+        }
+      }
+
+      Body1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." } if state.settings
+      BR()
+      Grid {
+        Cell { toggle } if state.settings
+        Cell {
+          Title { "Happiness" }
+          Body1 { "Measures of user's attitudes" }
+        }
+      }
+      BR()
+      Grid {
+        Cell { toggle } if state.settings
+        Cell {
+          Title { "Engagement" }
+          Body1 { "Level of user involvement" }
+        }
+      }
+      BR()
+      Grid {
+        Cell { toggle } if state.settings
+        Cell {
+          Title { "Adoption" }
+          Body1 { "Gaining new users of a product or feature" }
+        }
+      }
+      BR()
+      Grid {
+        Cell { toggle } if state.settings
+        Cell {
+          Title { "Retention" }
+          Body1 { "Rate at which existing users are returning" }
+        }
+      }
+      BR()
+      Grid {
+        Cell { toggle } if state.settings
+        Cell {
+          Title { "Task Success" }
+          Body1 { "Efficiency, effectiveness, and error rate" }
+        }
+      }
+
+
+    end
+
+    def toggle
+      Mui.Toggle()
+    end
+
 
     def rate_card
       #  Grid
@@ -67,7 +131,15 @@ module Probes
       unchecked = Mui.FontIcon(className: 'i fa fa-comment-o').as_node
       Mui.Checkbox(checkedIcon: checked.to_n, uncheckedIcon: unchecked.to_n, label: "click me")
 
-      Mui.Divider()
+      # buttons
+      Mui.FlatButton(label: 'Do the thing', primary: true, onClick: -> { alert "click click" })
+
+      #  toggle
+      Mui.Toggle()
+      Mui.Toggle(label: "blow hot and cold")
+
+      #  fields
+      Mui.TextField(hintText: "What do you want to achieve", floatingLabelText: "Objective", floatingLabelFixed: true)
 
     end
 

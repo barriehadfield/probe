@@ -15,8 +15,7 @@ module Home
       DIV {
         app_bar
         DIV(class: "app-content #{is_expanded}") {
-          # Mui.FlatButton(label: 'New Probe', primary: true, onClick: -> { alert "click click" })
-          # Display1 { "Big?" }
+          BR()
           ProbeCards()
         }
       }
@@ -32,11 +31,11 @@ module Home
         }
         Grid {
           Cell(text: :center) {
-              Mui.FlatButton(label: 'New Probe', primary: true, onClick: -> { alert "click click" })
+              Mui.FloatingActionButton { Mui.FontIcon(className: 'i fa fa-plus') }
           }
         }
 
-        Mui.MenuItem { "Filters" }
+        # Mui.MenuItem { "Filters" }
       }
     end
 
@@ -48,17 +47,6 @@ module Home
       state.show_drawer ? 'expanded' : ''
     end
 
-  end
-
-  class Filters < Hyperloop::Component
-    render do
-      # Card(class: 'shadow') {
-      #   CardBlock {
-      #     CardTitle { "Workshare Probe" }
-      #     Probes::Item(probe: Probe.new, new_probe: true)
-      #   }
-      # }
-    end
   end
 
   class ProbeCards < Hyperloop::Component

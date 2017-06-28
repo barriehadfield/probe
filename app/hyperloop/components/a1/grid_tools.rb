@@ -1,17 +1,17 @@
 module GridTools
 
   def Grid params = {} # gutters: false, align: top, responsive: false, text: center
-    c = 'grid'
-    c += ' grid--gutters' if params[:gutters]
-    c += ' large-grid' if params[:reponsive]
+    c = 'Grid'
+    c += ' Grid--gutters' if params[:gutters]
+    c += ' large-Grid' if params[:reponsive]
 
     case params[:align]
     when :top
-      c += ' grid--top'
+      c += ' Grid--top'
     when :center
-      c += ' grid--center'
+      c += ' Grid--center'
     when :bottom
-      c += ' grid--bottom'
+      c += ' Grid--bottom'
     end
 
     case params[:text]
@@ -27,15 +27,19 @@ module GridTools
   end
 
   def Cell params = {} # size: half, align: top
-    c = 'grid-cell'
+    c = 'Grid-cell'
+
+    if params[:col]
+      c+= " Grid--#{params:col}of12"
+    end
 
     case params[:size]
     when :half
-      c += ' grid--1of2'
+      c += ' Grid--1of2'
     when :third
-      c += ' grid--1of3'
+      c += ' Grid--1of3'
     when :quarter
-      c += ' grid--1of4'
+      c += ' Grid--1of4'
     end
 
     case params[:text]
@@ -49,11 +53,11 @@ module GridTools
 
     case params[:align]
     when :top
-      c += ' grid-cell--top'
+      c += ' Grid-cell--top'
     when :center
-      c += ' grid-cell--center'
+      c += ' Grid-cell--center'
     when :bottom
-      c += ' grid-cell--bottom'
+      c += ' Grid-cell--bottom'
     end
 
     DIV(class: "#{c}") { yield }

@@ -25,41 +25,7 @@ module Probes
             TH { "Metrics" }
           }
         }
-        TBODY {
-          TR {
-            TD {
-              SPAN { "Happiness - measures of user's attitudes."}
-              SPAN(class: 'pull-right') {Button(size: :sm) {"Enabled"}}
-            }
-            TD { "a" }
-            TD { "b" }
-            TD { "c" }
-          }
-          TR {
-            TD { "Engagement - level of user involvement." }
-            TD { "b" }
-            TD { "c" }
-            TD { "d" }
-          }
-          TR {
-            TD { "Adoption - gaining new users of a product or feature." }
-            TD { "b" }
-            TD { "c" }
-            TD { "d" }
-          }
-          TR {
-            TD { "Retention - rate at which existing users are returning." }
-            TD { "b" }
-            TD { "c" }
-            TD { "d" }
-          }
-          TR {
-            TD { "Task Success - efficiency, effectiveness, and error rate." }
-            TD { "b" }
-            TD { "c" }
-            TD { "d" }
-          }
-        }
+
       }
     end
   end
