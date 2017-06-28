@@ -67,6 +67,8 @@ module Probes
       unchecked = Mui.FontIcon(className: 'i fa fa-comment-o').as_node
       Mui.Checkbox(checkedIcon: checked.to_n, uncheckedIcon: unchecked.to_n, label: "click me")
 
+      Mui.Divider()
+
     end
 
     def icon
