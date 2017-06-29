@@ -26,16 +26,14 @@ module Home
       Mui.AppBar(className: "app-bar #{is_expanded}", title: 'Probe', onLeftIconButtonTouchTap: -> { toggle_drawer } )
       Mui.Drawer(open: state.show_drawer ) {
         # BR()
-        Grid(gutters: true) {
-          Cell(text: :center, gutters: true) { IMG(src: 'robot.png', width: '200px') }
-        }
-        Grid {
-          Cell(text: :center) {
-              Mui.FloatingActionButton { Mui.FontIcon(className: 'i fa fa-plus') }
+        Grid(fluid: true) {
+          Row(center: :xs) {
+            Col(xs: true) { IMG(src: 'robot.png', width: '200px') }
+          }
+          Row(center: :xs) {
+            Col(xs: true) { Mui.FloatingActionButton { Mui.FontIcon(className: 'i fa fa-plus') } }
           }
         }
-
-        # Mui.MenuItem { "Filters" }
       }
     end
 
@@ -51,9 +49,20 @@ module Home
 
   class ProbeCards < Hyperloop::Component
     render(DIV) do
-      Probe.reverse.each do |probe|
-        Probes::Item(probe: probe)
-      end
+
+      Grid(fluid: true) {
+        Row() {
+          Col(xs: true) { "One" }
+          Col(xs: true) { "Two" }
+          Col(xs: true) { "Tree" }
+          Col(xs: true) { "Four" }
+          Col(xs: true) { "Five" }
+        }
+      }
+
+      # Probe.reverse.each do |probe|
+        # Probes::Item(probe: probe)
+      # end
     end
   end
 
