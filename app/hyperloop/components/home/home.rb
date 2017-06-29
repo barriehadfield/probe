@@ -13,27 +13,26 @@ module Home
       Mui.MuiThemeProvider {
       DIV {
         app_bar
-        DIV(class: "app-content #{is_expanded}") {
-          BR()
+        # DIV(class: "app-content #{is_expanded}") {
+        #   BR()
           ProbeCards()
-        }
+        # }
       }
     }
     end
 
     def app_bar
-      Mui.AppBar(className: "app-bar #{is_expanded}", title: 'Probe', onLeftIconButtonTouchTap: -> { toggle_drawer } )
-      Mui.Drawer(open: state.show_drawer ) {
-        # BR()
-        Grid(fluid: true) {
-          Row(center: :xs) {
-            Col(xs: true) { IMG(src: 'robot.png', width: '200px') }
-          }
-          Row(center: :xs) {
-            Col(xs: true) { Mui.FloatingActionButton { Mui.FontIcon(className: 'i fa fa-plus') } }
-          }
-        }
-      }
+      Mui.AppBar(className: "app-bar #{is_expanded}", title: 'Probe', onClick: -> { toggle_drawer } )
+      # Mui.Drawer(open: state.show_drawer ) {
+      #   Grid(fluid: true) {
+      #     Row(center: :xs) {
+      #       Col(xs: true) { IMG(src: 'robot.png', width: '200px') }
+      #     }
+      #     Row(center: :xs) {
+      #       # Col(xs: true) { Mui.FloatingActionButton { Mui.FontIcon(className: 'i fa fa-plus') } }
+      #     }
+      #   }
+      # }
     end
 
     def toggle_drawer
@@ -50,11 +49,17 @@ module Home
     include MuiTools
 
     render(DIV) do
-      # Mui.Paper { font_card() }
+      Mui.Paper(elevation: 4) {
+        font_card
+      }
 
-      Probe.reverse.each do |probe|
-        Probes::Item(probe: probe)
-      end
+      Mui.Paper {
+        rate_card
+      }
+
+      # Probe.reverse.each do |probe|
+      #   Probes::Item(probe: probe)
+      # end
     end
   end
 

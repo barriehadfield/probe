@@ -61,4 +61,63 @@ module MuiTools
     }
   end
 
+  def rate_card
+    #  Grid
+    Grid {
+      Row {
+        Col { "I am a cell" }
+      }
+    }
+
+    # Button
+    Mui.Button(onClick: -> { alert("click click") } ) { "Button to click" }
+    Mui.Button(color: :primary ) { "Primary Button" }
+    Mui.Button(color: :accent ) { "Accent Button" }
+    Mui.Button(color: :accent, raised: true ) { "Accent Raised Button" }
+    Mui.Button(color: :primary, raised: true, fab: true ) { "+" }
+    BR()
+
+    # Icon
+    DIV(class: 'i fa fa-star')
+    Mui.Icon { DIV(class: 'i fa fa-star') }
+
+    #  Icon menu
+    # button = Mui.IconButton(iconClassName: 'i fa fa-cog').as_node
+    # Mui.IconMenu(iconButtonElement: button.to_n ) {
+    #   Mui.MenuItem { "Have me" }
+    #   Mui.MenuItem { "Or me" }
+    #   Mui.MenuItem { "Please take me" }
+    # }
+
+    #  Paper
+    style = {
+        height: 100,
+        width: 300,
+        margin: 20,
+        textAlign: 'center',
+        display: 'inline-block'
+    }
+    Mui.Paper(style: style) { P {"Hello there"} }
+
+    # floating action button
+    # Mui.FloatingActionButton { Mui.FontIcon(className: 'i fa fa-plus') }
+
+    #  Divider
+    Mui.Divider()
+
+    # Checkbox
+    mutate.check true if state.check.nil?
+    Mui.Checkbox()
+    Mui.LabelCheckbox(label: "I am a checkbox", checked: state.check ).on(:change) {
+      mutate.check !state.check
+    }
+
+    #  switch
+    Mui.Switch(checked: state.check ).on(:change) {
+      mutate.check !state.check
+    }
+
+  end
+
+
 end

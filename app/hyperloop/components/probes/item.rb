@@ -7,10 +7,10 @@ module Probes
 
     render(DIV) do
       Mui.Card() {
-        Mui.CardTitle(title: params.probe.name.to_s, showExpandableButton: true) {
-          summary
-        }
-        Mui.CardText(expandable: true) {
+        # Mui.CardTitle(title: params.probe.name.to_s, showExpandableButton: true) {
+          Body1 { summary }
+        # }
+        Mui.CardContent {
           body
         }
       }
@@ -90,63 +90,63 @@ module Probes
     end
 
 
-    def rate_card
-      #  Grid
-      Grid {
-        Cell(text: :right) {
-          "Right aligned Cell"
-        }
-      }
-
-      # Icon
-      Mui.FontIcon(className: 'i fa fa-star', style: { marginLeft: 100 })
-
-      #  Icon button
-      Mui.IconButton(iconClassName: 'i fa fa-heart', onClick: -> { alert "clicked" })
-
-      #  Icon menu
-      button = Mui.IconButton(iconClassName: 'i fa fa-cog').as_node
-      Mui.IconMenu(iconButtonElement: button.to_n ) {
-        Mui.MenuItem { "Have me" }
-        Mui.MenuItem { "Or me" }
-        Mui.MenuItem { "Please take me" }
-      }
-
-      #  Paper
-      style = {
-          height: 100,
-          width: 300,
-          margin: 20,
-          textAlign: 'center',
-          display: 'inline-block'
-      }
-      Mui.Paper(style: style, zDepth: 3) { P {"Hello there"} }
-
-      # floating action button
-      Mui.FloatingActionButton { Mui.FontIcon(className: 'i fa fa-plus') }
-
-      #  Divider
-      Mui.Divider()
-
-      # Checkbox
-      Mui.Checkbox(label: "I am a checkbox")
-
-      #  Icon checkbox
-      checked = Mui.FontIcon(className: 'i fa fa-comment').as_node
-      unchecked = Mui.FontIcon(className: 'i fa fa-comment-o').as_node
-      Mui.Checkbox(checkedIcon: checked.to_n, uncheckedIcon: unchecked.to_n, label: "click me")
-
-      # buttons
-      Mui.FlatButton(label: 'Do the thing', primary: true, onClick: -> { alert "click click" })
-
-      #  toggle
-      Mui.Toggle()
-      Mui.Toggle(label: "blow hot and cold")
-
-      #  fields
-      Mui.TextField(hintText: "What do you want to achieve", floatingLabelText: "Objective", floatingLabelFixed: true)
-
-    end
+    # def rate_card
+    #   #  Grid
+    #   Grid {
+    #     Cell(text: :right) {
+    #       "Right aligned Cell"
+    #     }
+    #   }
+    #
+    #   # Icon
+    #   Mui.FontIcon(className: 'i fa fa-star', style: { marginLeft: 100 })
+    #
+    #   #  Icon button
+    #   Mui.IconButton(iconClassName: 'i fa fa-heart', onClick: -> { alert "clicked" })
+    #
+    #   #  Icon menu
+    #   button = Mui.IconButton(iconClassName: 'i fa fa-cog').as_node
+    #   Mui.IconMenu(iconButtonElement: button.to_n ) {
+    #     Mui.MenuItem { "Have me" }
+    #     Mui.MenuItem { "Or me" }
+    #     Mui.MenuItem { "Please take me" }
+    #   }
+    #
+    #   #  Paper
+    #   style = {
+    #       height: 100,
+    #       width: 300,
+    #       margin: 20,
+    #       textAlign: 'center',
+    #       display: 'inline-block'
+    #   }
+    #   Mui.Paper(style: style, zDepth: 3) { P {"Hello there"} }
+    #
+    #   # floating action button
+    #   # Mui.FloatingActionButton { Mui.FontIcon(className: 'i fa fa-plus') }
+    #
+    #   #  Divider
+    #   Mui.Divider()
+    #
+    #   # Checkbox
+    #   Mui.Checkbox(label: "I am a checkbox")
+    #
+    #   #  Icon checkbox
+    #   checked = Mui.FontIcon(className: 'i fa fa-comment').as_node
+    #   unchecked = Mui.FontIcon(className: 'i fa fa-comment-o').as_node
+    #   Mui.Checkbox(checkedIcon: checked.to_n, uncheckedIcon: unchecked.to_n, label: "click me")
+    #
+    #   # buttons
+    #   Mui.FlatButton(label: 'Do the thing', primary: true, onClick: -> { alert "click click" })
+    #
+    #   #  toggle
+    #   Mui.Toggle()
+    #   Mui.Toggle(label: "blow hot and cold")
+    #
+    #   #  fields
+    #   Mui.TextField(hintText: "What do you want to achieve", floatingLabelText: "Objective", floatingLabelFixed: true)
+    #
+    # end
 
     def icon
       Mui.FontIcon(className: 'i fa fa-cog', style: {marginRight: 10})

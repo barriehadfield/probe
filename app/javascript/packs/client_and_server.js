@@ -3,11 +3,11 @@ React = require('react');
 
 TimeAgo = require('react-timeago').default;
 
-injectTapEventPlugin = require('react-tap-event-plugin');
-MuiThemeProvider = require('material-ui/styles/MuiThemeProvider');
+// injectTapEventPlugin = require('react-tap-event-plugin');
+MuiThemeProvider = require('material-ui/styles');
 Mui = require('material-ui');
 
-injectTapEventPlugin();
+// injectTapEventPlugin();
 
 Grid  = require('react-flexbox-grid').Grid;
 Row  = require('react-flexbox-grid').Row;
