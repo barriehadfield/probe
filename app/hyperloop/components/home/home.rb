@@ -56,17 +56,10 @@ module Home
     include MuiTools
 
     render(DIV) do
-      Mui.Paper(elevation: 4) {
-        font_card
-      }
-
-      Mui.Paper {
-        rate_card
-      }
-
-      # Probe.reverse.each do |probe|
-      #   Probes::Item(probe: probe)
-      # end
+      Probe.reverse.each do |probe|
+        Probes::Item(probe: probe)
+        BR()
+      end
     end
   end
 
