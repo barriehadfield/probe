@@ -24,7 +24,13 @@ module Probes
 
       Grid(fluid: true) {
         Row {
-          Col(xs: 11) { Title { "HEART" } }
+          Col(xs: 11) {
+            Title { "HEART" }
+            if state.settings
+              SubHeading1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." }
+              BR()
+            end
+          }
           Col(xs: 1) {
             button = Mui.IconButton(iconClassName: 'i fa fa-cog').as_node
             Mui.IconMenu(iconButtonElement: button.to_n ) {
@@ -34,15 +40,7 @@ module Probes
             }
           }
         }
-      }
 
-      Grid(fluid: true) {
-        Row {
-          if state.settings
-            Body1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." }
-            BR()
-          end
-        }
         Row {
           Col(xs: 1) { toggle } if state.settings
           Col(xs: true) {
@@ -50,7 +48,6 @@ module Probes
             Body1 { "Measures of user's attitudes" }
           }
         }
-        BR()
 
         Row {
           Col(xs: 1) { toggle } if state.settings
@@ -59,7 +56,6 @@ module Probes
             Body1 { "Level of user involvement" }
           }
         }
-        BR()
 
         Row {
           Col(xs: 1) { toggle } if state.settings
@@ -68,7 +64,6 @@ module Probes
             Body1 { "Gaining new users of a product or feature" }
           }
         }
-        BR()
 
         Row {
           Col(xs: 1) { toggle } if state.settings
@@ -77,7 +72,6 @@ module Probes
             Body1 { "Rate at which existing users are returning" }
           }
         }
-        BR()
 
         Row {
           Col(xs: 1) { toggle } if state.settings
@@ -86,7 +80,6 @@ module Probes
             Body1 { "Efficiency, effectiveness, and error rate" }
           }
         }
-        BR()
 
       }
 
