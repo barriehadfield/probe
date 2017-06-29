@@ -3,7 +3,6 @@
 module Home
   class Page < Hyperloop::Component
     include MuiTools
-    include GridTools
 
     before_mount do
       mutate.show_drawer true
@@ -50,19 +49,19 @@ module Home
   class ProbeCards < Hyperloop::Component
     render(DIV) do
 
-      Grid(fluid: true) {
-        Row() {
-          Col(xs: true) { "One" }
-          Col(xs: true) { "Two" }
-          Col(xs: true) { "Tree" }
-          Col(xs: true) { "Four" }
-          Col(xs: true) { "Five" }
-        }
-      }
+      # Grid(fluid: true) {
+      #   Row() {
+      #     Col(xs: true) { "One" }
+      #     Col(xs: true) { "Two" }
+      #     Col(xs: true) { "Tree" }
+      #     Col(xs: true) { "Four" }
+      #     Col(xs: true) { "Five" }
+      #   }
+      # }
 
-      # Probe.reverse.each do |probe|
-        # Probes::Item(probe: probe)
-      # end
+      Probe.reverse.each do |probe|
+        Probes::Item(probe: probe)
+      end
     end
   end
 

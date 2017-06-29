@@ -2,7 +2,6 @@ module Probes
 
   class Item < Hyperloop::Component
     include MuiTools
-    include GridTools
 
     param :probe
 
@@ -23,60 +22,73 @@ module Probes
 
     def body
 
-      Grid {
-        Cell { Title { "HEART" } }
-        Cell(text: :right) {
-          button = Mui.IconButton(iconClassName: 'i fa fa-cog').as_node
-          Mui.IconMenu(iconButtonElement: button.to_n ) {
-            Mui.MenuItem(onClick: -> { mutate.settings !state.settings  }) { "Settings" }
-            Mui.MenuItem { "Archive" }
-            Mui.MenuItem { "Delete" }
+      Grid(fluid: true) {
+        Row {
+          Col(xs: 11) { Title { "HEART" } }
+          Col(xs: 1) {
+            button = Mui.IconButton(iconClassName: 'i fa fa-cog').as_node
+            Mui.IconMenu(iconButtonElement: button.to_n ) {
+              Mui.MenuItem(onClick: -> { mutate.settings !state.settings } ) { "Settings" }
+              Mui.MenuItem { "Archive" }
+              Mui.MenuItem { "Delete" }
+            }
           }
         }
       }
 
-      Body1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." } if state.settings
-      BR()
-      Grid {
-        Cell { toggle } if state.settings
-        Cell {
-          Title { "Happiness" }
-          Body1 { "Measures of user's attitudes" }
+      Grid(fluid: true) {
+        Row {
+          if state.settings
+            Body1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." }
+            BR()
+          end
         }
-      }
-      BR()
-      Grid {
-        Cell { toggle } if state.settings
-        Cell {
-          Title { "Engagement" }
-          Body1 { "Level of user involvement" }
+        Row {
+          Col(xs: 1) { toggle } if state.settings
+          Col(xs: true) {
+            Title { "Happiness" }
+            Body1 { "Measures of user's attitudes" }
+          }
         }
-      }
-      BR()
-      Grid {
-        Cell { toggle } if state.settings
-        Cell {
-          Title { "Adoption" }
-          Body1 { "Gaining new users of a product or feature" }
-        }
-      }
-      BR()
-      Grid {
-        Cell { toggle } if state.settings
-        Cell {
-          Title { "Retention" }
-          Body1 { "Rate at which existing users are returning" }
-        }
-      }
-      BR()
-      Grid {
-        Cell { toggle } if state.settings
-        Cell {
-          Title { "Task Success" }
-          Body1 { "Efficiency, effectiveness, and error rate" }
-        }
-      }
+        BR()
 
+        Row {
+          Col(xs: 1) { toggle } if state.settings
+          Col(xs: true) {
+            Title { "Engagement" }
+            Body1 { "Level of user involvement" }
+          }
+        }
+        BR()
+
+        Row {
+          Col(xs: 1) { toggle } if state.settings
+          Col(xs: true) {
+            Title { "Adoption" }
+            Body1 { "Gaining new users of a product or feature" }
+          }
+        }
+        BR()
+
+        Row {
+          Col(xs: 1) { toggle } if state.settings
+          Col(xs: true) {
+            Title { "Retention" }
+            Body1 { "Rate at which existing users are returning" }
+          }
+        }
+        BR()
+
+        Row {
+          Col(xs: 1) { toggle } if state.settings
+          Col(xs: true) {
+            Title { "Task Success" }
+            Body1 { "Efficiency, effectiveness, and error rate" }
+          }
+        }
+        BR()
+
+      }
 
     end
 
