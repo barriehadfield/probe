@@ -47,17 +47,10 @@ module Home
   end
 
   class ProbeCards < Hyperloop::Component
-    render(DIV) do
+    include MuiTools
 
-      # Grid(fluid: true) {
-      #   Row() {
-      #     Col(xs: true) { "One" }
-      #     Col(xs: true) { "Two" }
-      #     Col(xs: true) { "Tree" }
-      #     Col(xs: true) { "Four" }
-      #     Col(xs: true) { "Five" }
-      #   }
-      # }
+    render(DIV) do
+      # Mui.Paper { font_card() }
 
       Probe.reverse.each do |probe|
         Probes::Item(probe: probe)

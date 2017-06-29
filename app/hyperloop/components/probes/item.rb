@@ -25,7 +25,7 @@ module Probes
       Grid(fluid: true) {
         Row {
           Col(xs: 11) {
-            Title { "HEART" }
+            Headline { "HEART" }
             if state.settings
               SubHeading1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." }
               BR()
