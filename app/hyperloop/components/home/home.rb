@@ -5,7 +5,7 @@ module Home
     include MuiTools
 
     before_mount do
-      mutate.show_drawer true
+      mutate.show_drawer false
     end
 
     render do
@@ -13,26 +13,33 @@ module Home
       Mui.MuiThemeProvider {
       DIV {
         app_bar
-        # DIV(class: "app-content #{is_expanded}") {
-        #   BR()
-          ProbeCards()
-        # }
+        drawer
+        DIV(class: "app-content #{is_expanded}") {
+          Grid {
+            ProbeCards()
+          }
+        }
       }
     }
     end
 
     def app_bar
-      Mui.AppBar(className: "app-bar #{is_expanded}", title: 'Probe', onClick: -> { toggle_drawer } )
-      # Mui.Drawer(open: state.show_drawer ) {
-      #   Grid(fluid: true) {
-      #     Row(center: :xs) {
-      #       Col(xs: true) { IMG(src: 'robot.png', width: '200px') }
-      #     }
-      #     Row(center: :xs) {
-      #       # Col(xs: true) { Mui.FloatingActionButton { Mui.FontIcon(className: 'i fa fa-plus') } }
-      #     }
-      #   }
-      # }
+      Mui.AppBar(className: "app-bar #{is_expanded}", position: :static ) {
+        Mui.Toolbar(type: :title) { Title {"Probe"} }
+      }
+    end
+
+    def drawer
+      Mui.Drawer(open: state.show_drawer, docked: true ) {
+        Grid(fluid: true) {
+          Row(center: :xs) {
+            Col(xs: true) { IMG(src: 'robot.png', width: '200px') }
+          }
+          Row(center: :xs) {
+            # Col(xs: true) { Mui.FloatingActionButton { Mui.FontIcon(className: 'i fa fa-plus') } }
+          }
+        }
+      }
     end
 
     def toggle_drawer
