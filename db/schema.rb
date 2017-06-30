@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170620094929) do
+ActiveRecord::Schema.define(version: 20170630143223) do
 
   create_table "hyperloop_connections", force: :cascade do |t|
     t.string "channel"
@@ -25,27 +25,7 @@ ActiveRecord::Schema.define(version: 20170620094929) do
     t.integer "connection_id"
   end
 
-  create_table "probes", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "description"
-    t.text "happiness_goals"
-    t.text "happiness_signals"
-    t.text "happiness_metrics"
-    t.text "engagement_goals"
-    t.text "engagement_signals"
-    t.text "engagement_metrics"
-    t.text "adoption_goals"
-    t.text "adoption_signals"
-    t.text "adoption_metrics"
-    t.text "retention_goals"
-    t.text "retention_signals"
-    t.text "retention_metrics"
-    t.text "task_goals"
-    t.text "task_signals"
-    t.text "task_metrics"
-    t.index ["id"], name: "index_probes_on_id"
-  end
+# Could not dump table "probes" because of following StandardError
+#   Unknown type 'boolian' for column 'happiness_bool'
 
 end
