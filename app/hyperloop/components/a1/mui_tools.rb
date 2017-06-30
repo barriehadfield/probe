@@ -117,6 +117,24 @@ module MuiTools
       mutate.check !state.check
     }
 
+    Mui.Divider()
+    #  input
+
+    mutate.value "" if state.value.nil?
+    H1 { state.value }
+    # Mui.TextField(onChange: lambda { |event| puts event.target.value })
+
+    # mutate.value  @value
+    Mui.TextField(label: "Full name", placeholder: "First name and last name")
+    Mui.TextField(label: "Dogs name").on(:change) do |e|
+      @value = e.target.value
+    end
+
+    # Body1 { state.value }
+    # Mui.TextField(value: state.value).on(:change) do |event|
+    #   mutate.value event.target.value
+    # end
+
   end
 
 
