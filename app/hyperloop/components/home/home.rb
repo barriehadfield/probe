@@ -40,6 +40,8 @@ module Home
       BR()
       rate_card
       BR()
+      font_card
+      BR()
       Probe.reverse.each do |probe|
         Probes::Item(probe: probe)
         BR()

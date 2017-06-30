@@ -6,7 +6,7 @@ module Probes
     param :probe
 
     before_mount do
-      mutate.settings true
+      mutate.edit_mode false
     end
 
     render(DIV) do
@@ -34,61 +34,61 @@ module Probes
       Grid(fluid: true) {
         Row {
           Col(xs: 11) {
-            Title { "HEART" }
-            if state.settings
-              SubHeading1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." }
-              BR()
-            end
+            # Title { "HEART" }
+            # if state.settings
+            #   SubHeading1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." }
+            #   BR()
+            # end
           }
           Col(xs: 1) {
-            # button = Mui.IconButton(iconClassName: 'i fa fa-cog').as_node
-            # Mui.IconMenu(iconButtonElement: button.to_n ) {
-            #   Mui.MenuItem(onClick: -> { mutate.settings !state.settings } ) { "Settings" }
-            #   Mui.MenuItem { "Archive" }
-            #   Mui.MenuItem { "Delete" }
-            # }
+            BUTTON {"Edit"}.on(:click) { mutate.edit_mode !state.edit_mode }
           }
         }
 
         Row {
-          Col(xs: 1) { toggle } if state.settings
+          Col(xs: 1) { toggle } if state.edit_mode
           Col(xs: true) {
-            Title { "Happiness" }
+            Headline { "Happiness" }
             Body1 { "Measures of user's attitudes" }
+
+            Categorie(edit_mode: state.edit_mode, probe: params.probe)
           }
         }
 
-        Row {
-          Col(xs: 1) { toggle } if state.settings
-          Col(xs: true) {
-            Title { "Engagement" }
-            Body1 { "Level of user involvement" }
-          }
-        }
+        BR()
+        BR()
 
-        Row {
-          Col(xs: 1) { toggle } if state.settings
-          Col(xs: true) {
-            Title { "Adoption" }
-            Body1 { "Gaining new users of a product or feature" }
-          }
-        }
-
-        Row {
-          Col(xs: 1) { toggle } if state.settings
-          Col(xs: true) {
-            Title { "Retention" }
-            Body1 { "Rate at which existing users are returning" }
-          }
-        }
-
-        Row {
-          Col(xs: 1) { toggle } if state.settings
-          Col(xs: true) {
-            Title { "Task Success" }
-            Body1 { "Efficiency, effectiveness, and error rate" }
-          }
-        }
+        # Row {
+        #   Col(xs: 1) { toggle } if state.settings
+        #   Col(xs: true) {
+        #     Title { "Engagement" }
+        #     Body1 { "Level of user involvement" }
+        #   }
+        # }
+        #
+        # Row {
+        #   Col(xs: 1) { toggle } if state.settings
+        #   Col(xs: true) {
+        #     Title { "Adoption" }
+        #     Body1 { "Gaining new users of a product or feature" }
+        #   }
+        # }
+        #
+        # Row {
+        #   Col(xs: 1) { toggle } if state.settings
+        #   Col(xs: true) {
+        #     Title { "Retention" }
+        #     Body1 { "Rate at which existing users are returning" }
+        #   }
+        # }
+        #
+        # Row {
+        #   Col(xs: 1) { toggle } if state.settings
+        #   Col(xs: true) {
+        #     Title { "Task Success" }
+        #     Body1 { "Efficiency, effectiveness, and error rate" }
+        #   }
+        # }
 
       }
 
