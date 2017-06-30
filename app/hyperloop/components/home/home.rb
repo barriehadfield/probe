@@ -13,8 +13,8 @@ module Home
             app_bar
           }
           Row {
-            Col(sm: 2) { drawer }
-            Col(sm: 10) { ProbeCards() }
+            Col(md: 2) { drawer }
+            Col(md: 10) { ProbeCards() }
           }
         }
       }
@@ -28,14 +28,7 @@ module Home
     end
 
     def drawer
-      Grid(fluid: true) {
-        Row(center: :xs) {
-          Col(xs: true) { IMG(src: 'robot-pink.png', width: '180px') }
-        }
-        Row(center: :xs) {
-          # Col(xs: true) { Mui.FloatingActionButton { Mui.FontIcon(className: 'i fa fa-plus') } }
-        }
-      }
+      IMG(src: 'robot-pink.png', width: '180px')
     end
 
   end
@@ -45,16 +38,10 @@ module Home
 
     render(DIV) do
       BR()
-      Grid(fluid: true) {
-        Probe.reverse.each do |probe|
-          Row {
-            Col {
-              Probes::Item(probe: probe)
-            }
-          }
-          BR()
-        end
-      }
+      Probe.reverse.each do |probe|
+        Probes::Item(probe: probe)
+        BR()
+      end
     end
   end
 

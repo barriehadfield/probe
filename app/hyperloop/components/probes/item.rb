@@ -12,7 +12,7 @@ module Probes
     render(DIV) do
       Mui.Card {
         Grid(fluid: true) {
-          Headline { params.probe.name }
+          Display1 { params.probe.name }
           Caption { SafeTimeAgo(date: params.probe.created_at ) }
           body
         }
