@@ -51,6 +51,13 @@ module Probes
           }
           Col(xs: 1) {
             BUTTON {"Edit"}.on(:click) { mutate.edit_mode !state.edit_mode }
+
+            mutate.show_save params.probe.changed?
+            BUTTON {"Save"}.on(:click) {
+              mutate.show_save false
+              params.probe.save
+              mutate.edit_mode false
+            } if state.show_save
           }
         }
 
