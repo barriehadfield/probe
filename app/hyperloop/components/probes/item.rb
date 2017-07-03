@@ -52,12 +52,10 @@ module Probes
           Col(xs: 1) {
             BUTTON {"Edit"}.on(:click) { mutate.edit_mode !state.edit_mode }
 
-            mutate.show_save params.probe.changed?
             BUTTON {"Save"}.on(:click) {
-              mutate.show_save false
               params.probe.save
               mutate.edit_mode false
-            } if state.show_save
+            }  if params.probe.changed?
           }
         }
 
@@ -234,7 +232,7 @@ end
 #       if state.should_delete
 #         Button(color: 'danger', size: 'sm', onClick: -> { delete }) { "Confirm Delete" }
 #       end
-#       mutate.show_save params.probe.changed?
+#       bad: mutate.show_save params.probe.changed?
 #       Button(color: 'success', onClick: -> { save }) { SaveIcon() } if state.show_save
 #       UncontrolledDropdown( color: 'primary') {
 #         DropdownToggle(caret: true) { SettingsIcon() }
