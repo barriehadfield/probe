@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170630143223) do
 
-  create_table "hyperloop_connections", force: :cascade do |t|
+  create_table "hyperloop_connections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "channel"
     t.string "session"
     t.datetime "created_at"
@@ -20,12 +20,37 @@ ActiveRecord::Schema.define(version: 20170630143223) do
     t.datetime "refresh_at"
   end
 
-  create_table "hyperloop_queued_messages", force: :cascade do |t|
+  create_table "hyperloop_queued_messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "data"
     t.integer "connection_id"
   end
 
-# Could not dump table "probes" because of following StandardError
-#   Unknown type 'boolian' for column 'happiness_bool'
+  create_table "probes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "description"
+    t.text "happiness_goals"
+    t.text "happiness_signals"
+    t.text "happiness_metrics"
+    t.text "engagement_goals"
+    t.text "engagement_signals"
+    t.text "engagement_metrics"
+    t.text "adoption_goals"
+    t.text "adoption_signals"
+    t.text "adoption_metrics"
+    t.text "retention_goals"
+    t.text "retention_signals"
+    t.text "retention_metrics"
+    t.text "task_goals"
+    t.text "task_signals"
+    t.text "task_metrics"
+    t.boolean "happiness_bool", default: false
+    t.boolean "engagement_bool", default: false
+    t.boolean "adoption_bool", default: false
+    t.boolean "retention_bool", default: false
+    t.boolean "task_bool", default: false
+    t.index ["id"], name: "index_probes_on_id"
+  end
 
 end
