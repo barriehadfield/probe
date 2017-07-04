@@ -18,15 +18,6 @@ module Probes
       }
     end
 
-    def checked? test
-      if test == 't'
-        ret = true
-      else
-        ret = false
-      end
-      ret
-    end
-
     def heading
       Row {  Col { BR() }}
       Row {
@@ -65,8 +56,8 @@ module Probes
 
         Row {
           Col(xs: 1) {
-            Mui.Switch(checked: checked?(params.probe.happiness_bool) ).on(:change) {
-              if params.probe.happiness_bool == 't'
+            Mui.Switch(checked: params.probe.happiness_bool? ).on(:change) {
+              if params.probe.happiness_bool?
                 params.probe.happiness_bool = 'f'
               else
                 params.probe.happiness_bool = 't'
@@ -75,11 +66,11 @@ module Probes
           } if state.edit_mode
 
           Col(xs: true) {
-            if params.probe.happiness_bool == 't' || state.edit_mode
+            if params.probe.happiness_bool? || state.edit_mode
               Headline { "Happiness" }
               Body1 { "Measures of user's attitudes" }
             end
-            if params.probe.happiness_bool == 't'
+            if params.probe.happiness_bool?
               BR()
               HappinessCategorie(edit_mode: state.edit_mode, probe: params.probe)
             end
