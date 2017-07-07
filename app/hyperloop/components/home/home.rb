@@ -8,17 +8,25 @@ module Home
       # Mui.MuiThemeProvider(muiTheme: `{muiTheme}`) {
       Mui.MuiThemeProvider {
       DIV {
-        Grid {
-          Row {
-            app_bar
-          }
-          Row {
-            Col(md: 2) { drawer }
-            Col(md: 10) { ProbeCards() }
-          }
+        app_bar
+        Mui.Grid(container: true) {
+          Mui.Grid(item: true, xs: 2) { drawer }
+          Mui.Grid(item: true, xs: 12, sm: 10) { paper }
         }
       }
     }
+    end
+
+    def paper
+      #  Paper
+      style = {
+          height: 100,
+          width: '100%',
+          margin: 20,
+          textAlign: 'center',
+          display: 'inline-block'
+      }
+      Mui.Paper() { P {"Hello there"} }
     end
 
     def app_bar
@@ -43,7 +51,7 @@ module Home
       # font_card
       BR()
       Probe.reverse.each do |probe|
-        Probes::Item(probe: probe)
+        # Probes::Item(probe: probe)
         BR()
       end
     end

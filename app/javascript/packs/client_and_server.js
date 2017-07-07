@@ -9,9 +9,9 @@ Mui = require('material-ui');
 
 // injectTapEventPlugin();
 
-Grid  = require('react-flexbox-grid').Grid;
-Row  = require('react-flexbox-grid').Row;
-Col  = require('react-flexbox-grid').Col;
+// Grid  = require('react-flexbox-grid').Grid;
+// Row  = require('react-flexbox-grid').Row;
+// Col  = require('react-flexbox-grid').Col;
 
 // import ReactDOM from 'react-dom';
 // import React from 'react';
