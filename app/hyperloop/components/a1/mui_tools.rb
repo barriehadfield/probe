@@ -1,3 +1,27 @@
+# below apparently work... (chat)
+# import { createMuiTheme } from 'material-ui/styles';
+# import createPalette from 'material-ui/styles/palette';
+# import { blue, green } from 'material-ui/styles/colors';
+#
+# const muiTheme = createMuiTheme({
+#   palette: createPalette({
+#     primary: blue,
+#     accent: {
+#       ...green,
+#       A200: '#4CAF50',
+#       A400: '#388E3C'
+#     }
+#   }),
+#   overrides: {
+#     MuiFormLabel: {
+#       focused: {
+#         color: '#333333'
+#       }
+#     }
+#   }
+# });
+
+
 module MuiTools
 
   def Display1
@@ -42,6 +66,15 @@ module MuiTools
 
   def Caption
     DIV(class: 'mdc-typography--caption') { yield }
+  end
+
+  def Label
+    DIV(class: 'mdc-typography--caption MuiFormLabel MuiInputLabel MuiInputLabel-formControl') { yield }
+
+  end
+
+  def input_style
+    { width: '100%' }
   end
 
   def font_card
@@ -121,13 +154,17 @@ module MuiTools
     #  input
 
     mutate.value "" if state.value.nil?
-    H1 { state.value }
+    # H1 { state.value }
     # Mui.TextField(onChange: lambda { |event| puts event.target.value })
 
+    H1 { state.value }
+
     # mutate.value  @value
-    Mui.TextField(label: "Full name", placeholder: "First name and last name")
+    Mui.TextField(label: "Full name", placeholder: "First name and last name", style: {width: '100%'})
+    BR()
     Mui.TextField(label: "Dogs name").on(:change) do |e|
-      @value = e.target.value
+      # @value = e.target.value
+      mutate.value e.target.value
     end
 
     # Body1 { state.value }

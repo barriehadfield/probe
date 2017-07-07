@@ -37,10 +37,10 @@ module Home
     include MuiTools
 
     render(DIV) do
-      BR()
-      rate_card
-      BR()
-      font_card
+      # BR()
+      # rate_card
+      # BR()
+      # font_card
       BR()
       Probe.reverse.each do |probe|
         Probes::Item(probe: probe)

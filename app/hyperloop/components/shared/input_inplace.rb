@@ -12,12 +12,14 @@ class InputInplace < Hyperloop::Component
 
   render(DIV) do
    if params.edit_mode
-     Mui.TextField(value: params.model[params.field.to_s].to_s, label: params.label, placeholder: params.placeholder.to_s).on(:change) do |e|
+     Mui.TextField(value: params.model[params.field.to_s].to_s, label: params.label,
+     style: input_style,
+     placeholder: params.placeholder.to_s).on(:change) do |e|
        params.model[params.field.to_s] = e.target.value
      end
    else
-     Title { params.label } if params.label
-     Body1 { params.model.send(params.field) }
+     Label { params.label } if params.label
+     Body1 { params.model.send(params.field) } 
    end
  end
 end
