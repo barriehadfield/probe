@@ -42,9 +42,9 @@ module MuiTools
 
   def Headline params = {}
     if params[:element] == :span
-      SPAN(class: 'mdc-typography--headline word-wrap') { yield }
+      SPAN(class: 'mdc-typography--headline') { yield }
     else
-      DIV(class: 'mdc-typography--headline word-wrap') { yield }
+      DIV(class: 'mdc-typography--headline') { yield }
     end
   end
 

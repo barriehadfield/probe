@@ -18,7 +18,7 @@ module Probes
 
     def heading
       Mui.Grid(container: true) {
-        Mui.Grid(item: true, md: 10) {
+        Mui.Grid(item: true, md: 10, className: 'word-wrap') {
             Headline { params.probe.name }
           }
         Mui.Grid(item: true, md: 2) {
