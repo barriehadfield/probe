@@ -9,24 +9,12 @@ module Home
       Mui.MuiThemeProvider {
       DIV {
         app_bar
-        Mui.Grid(container: true) {
-          Mui.Grid(item: true, xs: 2) { drawer }
-          Mui.Grid(item: true, xs: 12, sm: 10) { paper }
+        # Mui.Grid(container: true) {
+          # Mui.Grid(item: true, md: 2) { drawer }
+          ProbeCards()
         }
-      }
+      # }
     }
-    end
-
-    def paper
-      #  Paper
-      style = {
-          height: 100,
-          width: '100%',
-          margin: 20,
-          textAlign: 'center',
-          display: 'inline-block'
-      }
-      Mui.Paper() { P {"Hello there"} }
     end
 
     def app_bar
@@ -50,10 +38,12 @@ module Home
       # BR()
       # font_card
       BR()
-      Probe.reverse.each do |probe|
-        # Probes::Item(probe: probe)
-        BR()
-      end
+      Mui.Grid(container: true, justify: 'center', gutter: 16, direction: :column, className: 'main-container') {
+        Probe.reverse.each do |probe|
+          Probes::Item(probe: probe)
+          BR()
+        end
+      }
     end
   end
 

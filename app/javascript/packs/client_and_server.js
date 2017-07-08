@@ -6,6 +6,8 @@ TimeAgo = require('react-timeago').default;
 // injectTapEventPlugin = require('react-tap-event-plugin');
 MuiThemeProvider = require('material-ui/styles');
 Mui = require('material-ui');
+createStyleSheet = require('material-ui/styles').createStyleSheet;
+withStyles = require('material-ui/styles').withStyles;
 
 // injectTapEventPlugin();
 

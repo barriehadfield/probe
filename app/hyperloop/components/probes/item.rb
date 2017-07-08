@@ -10,26 +10,30 @@ module Probes
     end
 
     render(DIV) do
-      Mui.Card {
-        Grid(fluid: true) {
-          heading
-          body
+      Mui.Grid(item: true, xs: 12) {
+        Mui.Card {
+          Mui.Grid(container: true) {
+            heading
+            # body
+          }
         }
       }
     end
 
     def heading
-      Row {  Col { BR() }}
-      Row {
-        Col {
-          Display1 { params.probe.name }
-        }
-      }
-      Row {
-        Col {
+      # Row {  Col { BR() }}
+      # Row {
+        # Col {
+          Mui.Grid(item: true, sm: 12) {
+            Display1 { params.probe.name }
+          }
+        # }
+      # }
+      # Row {
+        # Col {
           Caption { SafeTimeAgo(date: params.probe.created_at ) }
-        }
-      }
+        # }
+      # }
       Mui.Divider()
       BR()
     end
