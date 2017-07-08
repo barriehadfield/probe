@@ -3,10 +3,10 @@ body {
 }
 
 .main-container {
-  padding-top: 10px;
-  padding-right: 15px;
-  padding-bottom: 20px;
-  padding-left: 15px;
+  padding-top: 0px;
+  padding-right: 25px;
+  padding-bottom: 5px;
+  padding-left: 25px;
 }
 
 .main-card {
@@ -23,5 +23,5 @@ body {
 }
 
 .left-indent {
-  padding-left: 25px;
+  padding-left: 10px;
 }

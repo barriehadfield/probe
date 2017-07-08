@@ -28,7 +28,7 @@ module Probes
     end
 
     def buttons
-      BUTTON {"Edit"}.on(:click) { mutate.edit_mode !state.edit_mode }
+      BUTTON {"Settings"}.on(:click) { mutate.edit_mode !state.edit_mode }
       BUTTON {"Save"}.on(:click) {
         params.probe.save
         mutate.edit_mode false
@@ -62,44 +62,87 @@ module Probes
             DIV(class: 'left-indent') {
               Body1 { "Measures of user's attitudes" }
               BR()
-              HappinessCategorie(edit_mode: state.edit_mode, probe: params.probe)
+              Categorie(categorie: :happiness, edit_mode: state.edit_mode, probe: params.probe)
+            }
+          end
+        }
+
+        Mui.Grid(item: true) {
+          if params.probe.engagement_bool || state.edit_mode
+            SPAN {
+                Mui.Switch(checked: params.probe.engagement_bool ).on(:change) {
+                  params.probe.engagement_bool = !params.probe.engagement_bool
+                }
+            } if state.edit_mode
+
+            Headline(element: :span) { "Engagement" }
+          end
+          if params.probe.engagement_bool
+            DIV(class: 'left-indent') {
+              Body1 { "Level of user involvement" }
+              BR()
+              Categorie(categorie: :engagement, edit_mode: state.edit_mode, probe: params.probe)
+            }
+          end
+        }
+
+        Mui.Grid(item: true) {
+          if params.probe.adoption_bool || state.edit_mode
+            SPAN {
+                Mui.Switch(checked: params.probe.adoption_bool ).on(:change) {
+                  params.probe.adoption_bool = !params.probe.adoption_bool
+                }
+            } if state.edit_mode
+
+            Headline(element: :span) { "Adoption" }
+          end
+          if params.probe.adoption_bool
+            DIV(class: 'left-indent') {
+              Body1 { "Gaining new users" }
+              BR()
+              Categorie(categorie: :adoption, edit_mode: state.edit_mode, probe: params.probe)
+            }
+          end
+        }
+
+        Mui.Grid(item: true) {
+          if params.probe.retention_bool || state.edit_mode
+            SPAN {
+                Mui.Switch(checked: params.probe.retention_bool ).on(:change) {
+                  params.probe.retention_bool = !params.probe.retention_bool
+                }
+            } if state.edit_mode
+
+            Headline(element: :span) { "Retention" }
+          end
+          if params.probe.retention_bool
+            DIV(class: 'left-indent') {
+              Body1 { "Rate at which existing users are returning" }
+              BR()
+              Categorie(categorie: :retention, edit_mode: state.edit_mode, probe: params.probe)
+            }
+          end
+        }
+
+        Mui.Grid(item: true) {
+          if params.probe.task_bool || state.edit_mode
+            SPAN {
+                Mui.Switch(checked: params.probe.task_bool ).on(:change) {
+                  params.probe.task_bool = !params.probe.task_bool
+                }
+            } if state.edit_mode
+
+            Headline(element: :span) { "Task Success" }
+          end
+          if params.probe.task_bool
+            DIV(class: 'left-indent') {
+              Body1 { "Efficiency, effectiveness, and error rate" }
+              BR()
+              Categorie(categorie: :task, edit_mode: state.edit_mode, probe: params.probe)
             }
           end
         }
       }
-        # Row {
-        #   Col(xs: 1) { toggle } if state.settings
-        #   Col(xs: true) {
-        #     Title { "Engagement" }
-        #     Body1 { "Level of user involvement" }
-        #   }
-        # }
-        #
-        # Row {
-        #   Col(xs: 1) { toggle } if state.settings
-        #   Col(xs: true) {
-        #     Title { "Adoption" }
-        #     Body1 { "Gaining new users of a product or feature" }
-        #   }
-        # }
-        #
-        # Row {
-        #   Col(xs: 1) { toggle } if state.settings
-        #   Col(xs: true) {
-        #     Title { "Retention" }
-        #     Body1 { "Rate at which existing users are returning" }
-        #   }
-        # }
-        #
-        # Row {
-        #   Col(xs: 1) { toggle } if state.settings
-        #   Col(xs: true) {
-        #     Title { "Task Success" }
-        #     Body1 { "Efficiency, effectiveness, and error rate" }
-        #   }
-        # }
-
-
     end
 
     def toggle
