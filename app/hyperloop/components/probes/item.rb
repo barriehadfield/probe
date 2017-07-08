@@ -50,6 +50,8 @@ module Probes
 
         Mui.Grid(item: true) {
           if params.probe.happiness_bool || state.edit_mode
+            Mui.Divider(light: true)
+            BR()
             SPAN {
                 Mui.Switch(checked: params.probe.happiness_bool ).on(:change) {
                   params.probe.happiness_bool = !params.probe.happiness_bool
@@ -65,10 +67,13 @@ module Probes
               Categorie(categorie: :happiness, edit_mode: state.edit_mode, probe: params.probe)
             }
           end
+          # Mui.Divider(light: true)
         }
 
         Mui.Grid(item: true) {
           if params.probe.engagement_bool || state.edit_mode
+            Mui.Divider(light: true)
+            BR()
             SPAN {
                 Mui.Switch(checked: params.probe.engagement_bool ).on(:change) {
                   params.probe.engagement_bool = !params.probe.engagement_bool
@@ -84,10 +89,13 @@ module Probes
               Categorie(categorie: :engagement, edit_mode: state.edit_mode, probe: params.probe)
             }
           end
+          # Mui.Divider(light: true)
         }
 
         Mui.Grid(item: true) {
           if params.probe.adoption_bool || state.edit_mode
+            Mui.Divider(light: true)
+            BR()
             SPAN {
                 Mui.Switch(checked: params.probe.adoption_bool ).on(:change) {
                   params.probe.adoption_bool = !params.probe.adoption_bool
@@ -103,10 +111,13 @@ module Probes
               Categorie(categorie: :adoption, edit_mode: state.edit_mode, probe: params.probe)
             }
           end
+          # Mui.Divider(light: true)
         }
 
         Mui.Grid(item: true) {
           if params.probe.retention_bool || state.edit_mode
+            Mui.Divider(light: true)
+            BR()
             SPAN {
                 Mui.Switch(checked: params.probe.retention_bool ).on(:change) {
                   params.probe.retention_bool = !params.probe.retention_bool
@@ -122,10 +133,13 @@ module Probes
               Categorie(categorie: :retention, edit_mode: state.edit_mode, probe: params.probe)
             }
           end
+          # Mui.Divider(light: true)
         }
 
         Mui.Grid(item: true) {
           if params.probe.task_bool || state.edit_mode
+            Mui.Divider(light: true)
+            BR()
             SPAN {
                 Mui.Switch(checked: params.probe.task_bool ).on(:change) {
                   params.probe.task_bool = !params.probe.task_bool
@@ -141,6 +155,7 @@ module Probes
               Categorie(categorie: :task, edit_mode: state.edit_mode, probe: params.probe)
             }
           end
+          # Mui.Divider(light: true)
         }
       }
     end
