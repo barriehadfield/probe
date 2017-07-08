@@ -39,23 +39,14 @@ module Probes
       Mui.Grid(container: true,  direction: :column) {
         # Title { "HEART" }
         Mui.Grid(item: true) {
-          if state.edit_mode
-            SubHeading1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." }
-            BR()
-          end
-        }
-
-        Mui.Grid(item: true) {
           buttons
         }
 
-        # Mui.Grid(item: true) {
-        #   DIV {
-        #       Mui.Switch(checked: params.probe.happiness_bool ).on(:change) {
-        #         params.probe.happiness_bool = !params.probe.happiness_bool
-        #       }
-        #   } if state.edit_mode
-        # }
+        Mui.Grid(item: true) {
+          if state.edit_mode
+            SubHeading1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." }
+          end
+        }
 
         Mui.Grid(item: true) {
           if params.probe.happiness_bool || state.edit_mode
