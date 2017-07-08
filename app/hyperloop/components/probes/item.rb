@@ -12,7 +12,7 @@ module Probes
     render(DIV) do
       Mui.Card(className: 'main-card') {
         heading
-        # body
+        body
       }
     end
 
@@ -28,43 +28,33 @@ module Probes
     end
 
     def body
-      Grid(fluid: true) {
-        Row {
-          Col(xs: 11) {
-            # Title { "HEART" }
-            if state.edit_mode
-              SubHeading1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." }
-              BR()
-            end
-          }
-          Col(xs: 1) {
-            BUTTON {"Edit"}.on(:click) { mutate.edit_mode !state.edit_mode }
+        # Title { "HEART" }
+        if state.edit_mode
+          SubHeading1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." }
+          BR()
+        end
 
-            BUTTON {"Save"}.on(:click) {
-              params.probe.save
-              mutate.edit_mode false
-            }  if params.probe.changed?
-          }
-        }
+        BUTTON {"Edit"}.on(:click) { mutate.edit_mode !state.edit_mode }
 
-        Row {
-          Col(xs: 1) {
+        BUTTON {"Save"}.on(:click) {
+          params.probe.save
+          mutate.edit_mode false
+        }  if params.probe.changed?
+
+        DIV {
             Mui.Switch(checked: params.probe.happiness_bool ).on(:change) {
               params.probe.happiness_bool = !params.probe.happiness_bool
             }
-          } if state.edit_mode
+        } if state.edit_mode
 
-          Col(xs: true) {
-            if params.probe.happiness_bool || state.edit_mode
-              Headline { "Happiness" }
-              Body1 { "Measures of user's attitudes" }
-            end
-            if params.probe.happiness_bool
-              BR()
-              HappinessCategorie(edit_mode: state.edit_mode, probe: params.probe)
-            end
-          }
-        }
+        if params.probe.happiness_bool || state.edit_mode
+          Headline { "Happiness" }
+          Body1 { "Measures of user's attitudes" }
+        end
+        if params.probe.happiness_bool
+          BR()
+          HappinessCategorie(edit_mode: state.edit_mode, probe: params.probe)
+        end
 
         BR()
         BR()
@@ -101,7 +91,6 @@ module Probes
         #   }
         # }
 
-      }
 
     end
 
