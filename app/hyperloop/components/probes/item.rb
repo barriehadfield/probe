@@ -27,38 +27,56 @@ module Probes
       }
     end
 
+    def buttons
+      BUTTON {"Edit"}.on(:click) { mutate.edit_mode !state.edit_mode }
+      BUTTON {"Save"}.on(:click) {
+        params.probe.save
+        mutate.edit_mode false
+      }  if params.probe.changed?
+    end
+
     def body
+      Mui.Grid(container: true,  direction: :column) {
         # Title { "HEART" }
-        if state.edit_mode
-          SubHeading1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." }
-          BR()
-        end
+        Mui.Grid(item: true) {
+          if state.edit_mode
+            SubHeading1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." }
+            BR()
+          end
+        }
 
-        BUTTON {"Edit"}.on(:click) { mutate.edit_mode !state.edit_mode }
+        Mui.Grid(item: true) {
+          buttons
+        }
 
-        BUTTON {"Save"}.on(:click) {
-          params.probe.save
-          mutate.edit_mode false
-        }  if params.probe.changed?
+        # Mui.Grid(item: true) {
+        #   DIV {
+        #       Mui.Switch(checked: params.probe.happiness_bool ).on(:change) {
+        #         params.probe.happiness_bool = !params.probe.happiness_bool
+        #       }
+        #   } if state.edit_mode
+        # }
 
-        DIV {
-            Mui.Switch(checked: params.probe.happiness_bool ).on(:change) {
-              params.probe.happiness_bool = !params.probe.happiness_bool
+        Mui.Grid(item: true) {
+          if params.probe.happiness_bool || state.edit_mode
+            SPAN {
+                Mui.Switch(checked: params.probe.happiness_bool ).on(:change) {
+                  params.probe.happiness_bool = !params.probe.happiness_bool
+                }
+            } if state.edit_mode
+
+            Headline(element: :span) { "Happiness" }
+            Body1 { "Measures of user's attitudes" }
+          end
+          if params.probe.happiness_bool
+            BR()
+            DIV(class: 'left-indent') {
+              HappinessCategorie(edit_mode: state.edit_mode, probe: params.probe)
             }
-        } if state.edit_mode
+          end
+        }
 
-        if params.probe.happiness_bool || state.edit_mode
-          Headline { "Happiness" }
-          Body1 { "Measures of user's attitudes" }
-        end
-        if params.probe.happiness_bool
-          BR()
-          HappinessCategorie(edit_mode: state.edit_mode, probe: params.probe)
-        end
-
-        BR()
-        BR()
-
+      }
         # Row {
         #   Col(xs: 1) { toggle } if state.settings
         #   Col(xs: true) {

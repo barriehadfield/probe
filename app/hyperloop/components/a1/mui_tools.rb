@@ -40,8 +40,12 @@ module MuiTools
     DIV(class: 'mdc-typography--display4') { yield }
   end
 
-  def Headline
-    DIV(class: 'mdc-typography--headline') { yield }
+  def Headline params = {}
+    if params[:element] == :span
+      SPAN(class: 'mdc-typography--headline word-wrap') { yield }
+    else
+      DIV(class: 'mdc-typography--headline word-wrap') { yield }
+    end
   end
 
   def Title
@@ -89,7 +93,7 @@ module MuiTools
       SubHeading2 { "SubHeading2" }
       Body1 { "Body1" }
       Body2 { "Body2" }
-      Caption { "Caption" } 
+      Caption { "Caption" }
       BR()
   end
 
