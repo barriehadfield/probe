@@ -57,16 +57,15 @@ module Probes
             } if state.edit_mode
 
             Headline(element: :span) { "Happiness" }
-            Body1 { "Measures of user's attitudes" }
           end
           if params.probe.happiness_bool
-            BR()
             DIV(class: 'left-indent') {
+              Body1 { "Measures of user's attitudes" }
+              BR()
               HappinessCategorie(edit_mode: state.edit_mode, probe: params.probe)
             }
           end
         }
-
       }
         # Row {
         #   Col(xs: 1) { toggle } if state.settings
