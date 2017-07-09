@@ -37,7 +37,6 @@ module Probes
 
     def body
       Mui.Grid(container: true,  direction: :column) {
-        # Title { "HEART" }
         Mui.Grid(item: true) {
           buttons
         }
@@ -48,115 +47,105 @@ module Probes
           end
         }
 
-        Mui.Grid(item: true) {
-          if params.probe.happiness_bool || state.edit_mode
-            Mui.Divider(light: true)
-            BR()
-            SPAN {
-                Mui.Switch(checked: params.probe.happiness_bool ).on(:change) {
-                  params.probe.happiness_bool = !params.probe.happiness_bool
-                }
-            } if state.edit_mode
+        [ { categorie: :happiness, categorie_name: "Happiness", categorie_description: "Measures of user's attitudes" },
+          { categorie: :engagement, categorie_name: "Engagement", categorie_description: "Level of user involvement" },
+          { categorie: :adoption, categorie_name: "Adoption", categorie_description: "Gaining new users" },
+          { categorie: :retention, categorie_name: "Retention", categorie_description: "Rate at which existing users are returning" },
+          { categorie: :task, categorie_name: "Task Success", categorie_description: "Efficiency, effectiveness, and error rat" }
+        ].each do |h|
+          Categorie(categorie_name: h[:categorie_name], categorie_description: h[:categorie_description],
+            categorie: h[:categorie], edit_mode: state.edit_mode, probe: params.probe)
+        end
 
-            Headline(element: :span) { "Happiness" }
-          end
-          if params.probe.happiness_bool
-            DIV(class: 'left-indent') {
-              Body1 { "Measures of user's attitudes" }
-              BR()
-              Categorie(categorie: :happiness, edit_mode: state.edit_mode, probe: params.probe)
-            }
-          end
-          # Mui.Divider(light: true)
-        }
+        # ---------------------------------------
 
-        Mui.Grid(item: true) {
-          if params.probe.engagement_bool || state.edit_mode
-            Mui.Divider(light: true)
-            BR()
-            SPAN {
-                Mui.Switch(checked: params.probe.engagement_bool ).on(:change) {
-                  params.probe.engagement_bool = !params.probe.engagement_bool
-                }
-            } if state.edit_mode
-
-            Headline(element: :span) { "Engagement" }
-          end
-          if params.probe.engagement_bool
-            DIV(class: 'left-indent') {
-              Body1 { "Level of user involvement" }
-              BR()
-              Categorie(categorie: :engagement, edit_mode: state.edit_mode, probe: params.probe)
-            }
-          end
-          # Mui.Divider(light: true)
-        }
-
-        Mui.Grid(item: true) {
-          if params.probe.adoption_bool || state.edit_mode
-            Mui.Divider(light: true)
-            BR()
-            SPAN {
-                Mui.Switch(checked: params.probe.adoption_bool ).on(:change) {
-                  params.probe.adoption_bool = !params.probe.adoption_bool
-                }
-            } if state.edit_mode
-
-            Headline(element: :span) { "Adoption" }
-          end
-          if params.probe.adoption_bool
-            DIV(class: 'left-indent') {
-              Body1 { "Gaining new users" }
-              BR()
-              Categorie(categorie: :adoption, edit_mode: state.edit_mode, probe: params.probe)
-            }
-          end
-          # Mui.Divider(light: true)
-        }
-
-        Mui.Grid(item: true) {
-          if params.probe.retention_bool || state.edit_mode
-            Mui.Divider(light: true)
-            BR()
-            SPAN {
-                Mui.Switch(checked: params.probe.retention_bool ).on(:change) {
-                  params.probe.retention_bool = !params.probe.retention_bool
-                }
-            } if state.edit_mode
-
-            Headline(element: :span) { "Retention" }
-          end
-          if params.probe.retention_bool
-            DIV(class: 'left-indent') {
-              Body1 { "Rate at which existing users are returning" }
-              BR()
-              Categorie(categorie: :retention, edit_mode: state.edit_mode, probe: params.probe)
-            }
-          end
-          # Mui.Divider(light: true)
-        }
-
-        Mui.Grid(item: true) {
-          if params.probe.task_bool || state.edit_mode
-            Mui.Divider(light: true)
-            BR()
-            SPAN {
-                Mui.Switch(checked: params.probe.task_bool ).on(:change) {
-                  params.probe.task_bool = !params.probe.task_bool
-                }
-            } if state.edit_mode
-
-            Headline(element: :span) { "Task Success" }
-          end
-          if params.probe.task_bool
-            DIV(class: 'left-indent') {
-              Body1 { "Efficiency, effectiveness, and error rate" }
-              BR()
-              Categorie(categorie: :task, edit_mode: state.edit_mode, probe: params.probe)
-            }
-          end
-          # Mui.Divider(light: true)
-        }
+        # Mui.Grid(item: true) {
+        #   if params.probe.engagement_bool || state.edit_mode
+        #     Mui.Divider(light: true)
+        #     BR()
+        #     SPAN {
+        #         Mui.Switch(checked: params.probe.engagement_bool ).on(:change) {
+        #           params.probe.engagement_bool = !params.probe.engagement_bool
+        #         }
+        #     } if state.edit_mode
+        #
+        #     Headline(element: :span) { "Engagement" }
+        #   end
+        #   if params.probe.engagement_bool
+        #     DIV(class: 'left-indent') {
+        #       Body1 { "Level of user involvement" }
+        #       BR()
+        #       Categorie(categorie: :engagement, edit_mode: state.edit_mode, probe: params.probe)
+        #     }
+        #   end
+        #   # Mui.Divider(light: true)
+        # }
+        #
+        # Mui.Grid(item: true) {
+        #   if params.probe.adoption_bool || state.edit_mode
+        #     Mui.Divider(light: true)
+        #     BR()
+        #     SPAN {
+        #         Mui.Switch(checked: params.probe.adoption_bool ).on(:change) {
+        #           params.probe.adoption_bool = !params.probe.adoption_bool
+        #         }
+        #     } if state.edit_mode
+        #
+        #     Headline(element: :span) { "Adoption" }
+        #   end
+        #   if params.probe.adoption_bool
+        #     DIV(class: 'left-indent') {
+        #       Body1 { "Gaining new users" }
+        #       BR()
+        #       Categorie(categorie: :adoption, edit_mode: state.edit_mode, probe: params.probe)
+        #     }
+        #   end
+        #   # Mui.Divider(light: true)
+        # }
+        #
+        # Mui.Grid(item: true) {
+        #   if params.probe.retention_bool || state.edit_mode
+        #     Mui.Divider(light: true)
+        #     BR()
+        #     SPAN {
+        #         Mui.Switch(checked: params.probe.retention_bool ).on(:change) {
+        #           params.probe.retention_bool = !params.probe.retention_bool
+        #         }
+        #     } if state.edit_mode
+        #
+        #     Headline(element: :span) { "Retention" }
+        #   end
+        #   if params.probe.retention_bool
+        #     DIV(class: 'left-indent') {
+        #       Body1 { "Rate at which existing users are returning" }
+        #       BR()
+        #       Categorie(categorie: :retention, edit_mode: state.edit_mode, probe: params.probe)
+        #     }
+        #   end
+        #   # Mui.Divider(light: true)
+        # }
+        #
+        # Mui.Grid(item: true) {
+        #   if params.probe.task_bool || state.edit_mode
+        #     Mui.Divider(light: true)
+        #     BR()
+        #     SPAN {
+        #         Mui.Switch(checked: params.probe.task_bool ).on(:change) {
+        #           params.probe.task_bool = !params.probe.task_bool
+        #         }
+        #     } if state.edit_mode
+        #
+        #     Headline(element: :span) { "Task Success" }
+        #   end
+        #   if params.probe.task_bool
+        #     DIV(class: 'left-indent') {
+        #       Body1 { "Efficiency, effectiveness, and error rate" }
+        #       BR()
+        #       Categorie(categorie: :task, edit_mode: state.edit_mode, probe: params.probe)
+        #     }
+        #   end
+        #   # Mui.Divider(light: true)
+        # }
       }
     end
 

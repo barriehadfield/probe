@@ -1,24 +1,47 @@
 class Categorie < Hyperloop::Component
 
+  include MuiTools
+
+  param :categorie
+  param :categorie_name
+  param :categorie_description
+
   param :edit_mode
   param :probe
-  param :categorie
 
   render(DIV) do
-    InputInplace(field: "#{params.categorie}_goals", model: params.probe, label: "Goals",
-      placeholder: "What are you trying to achieve?", edit_mode: params.edit_mode)
-    # Mui.Divider(light: true)
-    BR()
+    Mui.Grid(item: true) {
+      if params.probe["#{params.categorie}_bool"] || params.edit_mode
+        Mui.Divider(light: true)
+        BR()
+        SPAN {
+            Mui.Switch(checked: params.probe["#{params.categorie}_bool"] ).on(:change) {
+              params.probe["#{params.categorie}_bool"] = !params.probe["#{params.categorie}_bool"]
+            }
+        } if params.edit_mode
 
-    InputInplace(field: "#{params.categorie}_signals", model: params.probe, label: "Signals",
-      placeholder: "Name the signals you expect to see", edit_mode: params.edit_mode)
-    # Mui.Divider(light: true)
-    BR()
+        Headline(element: :span) { params.categorie_name }
+        Body1 { params.categorie_description }
+      end
 
-    InputInplace(field: "#{params.categorie}_metrics", model: params.probe, label: "Metrics",
-      placeholder: "And now time for the metrics", edit_mode: params.edit_mode)
-    # Mui.Divider(light: true)
-    BR()
+      if params.probe["#{params.categorie}_bool"]
+        DIV(class: 'left-indent') {
+          BR()
+
+          InputInplace(field: "#{params.categorie}_goals", model: params.probe, label: "Goals",
+            placeholder: "What are you trying to achieve?", edit_mode: params.edit_mode)
+          BR()
+
+          InputInplace(field: "#{params.categorie}_signals", model: params.probe, label: "Signals",
+            placeholder: "What signals do you expect to see?", edit_mode: params.edit_mode)
+          BR()
+
+          InputInplace(field: "#{params.categorie}_metrics", model: params.probe, label: "Metrics",
+            placeholder: "And how will you measure this?", edit_mode: params.edit_mode)
+          BR()
+        }
+      end
+    }
   end
 
 end
