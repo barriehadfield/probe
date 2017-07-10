@@ -3,8 +3,8 @@ class Categorie < Hyperloop::Component
   include MuiTools
 
   param :categorie
-  param :categorie_name
-  param :categorie_description
+  param :name
+  param :description
 
   param :edit_mode
   param :probe
@@ -14,14 +14,15 @@ class Categorie < Hyperloop::Component
       if params.probe["#{params.categorie}_bool"] || params.edit_mode
         Mui.Divider(light: true)
         BR()
+        
         SPAN {
             Mui.Switch(checked: params.probe["#{params.categorie}_bool"] ).on(:change) {
               params.probe["#{params.categorie}_bool"] = !params.probe["#{params.categorie}_bool"]
             }
         } if params.edit_mode
 
-        Headline(element: :span) { params.categorie_name }
-        Body1 { params.categorie_description }
+        Headline(element: :span) { params.name }
+        Body1 { params.description }
       end
 
       if params.probe["#{params.categorie}_bool"]
