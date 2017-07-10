@@ -14,15 +14,21 @@ class Categorie < Hyperloop::Component
       if params.probe["#{params.categorie}_bool"] || params.edit_mode
         Mui.Divider(light: true)
         BR()
-        
-        SPAN {
-            Mui.Switch(checked: params.probe["#{params.categorie}_bool"] ).on(:change) {
-              params.probe["#{params.categorie}_bool"] = !params.probe["#{params.categorie}_bool"]
-            }
-        } if params.edit_mode
 
-        Headline(element: :span) { params.name }
-        Body1 { params.description }
+        Mui.Grid(container: true, align: :center) {
+          Mui.Grid(item: true) {
+
+            SPAN {
+                Mui.Switch(checked: params.probe["#{params.categorie}_bool"] ).on(:change) {
+                  params.probe["#{params.categorie}_bool"] = !params.probe["#{params.categorie}_bool"]
+                }
+            } if params.edit_mode
+
+            Headline(element: :span) { params.name.upcase }
+          }
+          Mui.Grid(item: true) { Body1 { params.description } } if params.edit_mode
+        }
+
       end
 
       if params.probe["#{params.categorie}_bool"]

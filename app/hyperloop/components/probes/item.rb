@@ -10,7 +10,7 @@ module Probes
     end
 
     render(DIV) do
-      Mui.Card(className: 'main-card') {
+      Mui.Card(className: 'main-card', raised: true) {
         heading
         body
       }
@@ -18,17 +18,21 @@ module Probes
 
     def heading
       Mui.Grid(container: true) {
-        Mui.Grid(item: true, md: 10, className: 'word-wrap') {
+        Mui.Grid(item: true, sm: 10) {
             Headline { params.probe.name }
+            Caption { SPAN { "Updated " }
+              SafeTimeAgo(date: params.probe.created_at )
+            }
           }
-        Mui.Grid(item: true, md: 2) {
-          Caption { SafeTimeAgo(date: params.probe.created_at ) }
+        Mui.Grid(item: true, sm: 2, justify: 'flex-end') {
+          buttons
         }
       }
     end
 
     def buttons
-      BUTTON {"Settings"}.on(:click) { mutate.edit_mode !state.edit_mode }
+      Mui.IconButton(onClick: -> { mutate.edit_mode !state.edit_mode } ) { SettingsIcon() }
+
       BUTTON {"Save"}.on(:click) {
         params.probe.save
         mutate.edit_mode false
@@ -37,9 +41,9 @@ module Probes
 
     def body
       Mui.Grid(container: true,  direction: :column) {
-        Mui.Grid(item: true) {
-          buttons
-        }
+        # Mui.Grid(item: true) {
+        #   buttons
+        # }
 
         Mui.Grid(item: true) {
           if state.edit_mode

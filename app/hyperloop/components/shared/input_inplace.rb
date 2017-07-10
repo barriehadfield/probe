@@ -18,8 +18,8 @@ class InputInplace < Hyperloop::Component
        params.model[params.field.to_s] = e.target.value
      end
    else
-     Label { params.label } if params.label
-     Body1 { params.model.send(params.field) } 
+    #  Label { params.label } if params.label
+     Body1 { params.model.send(params.field) }
    end
  end
 end
