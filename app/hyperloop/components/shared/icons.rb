@@ -16,14 +16,20 @@ class SettingsIcon < Hyperloop::Component
   end
 end
 
-class SaveIcon <Hyperloop::Component
+class SaveIcon < Hyperloop::Component
   render do
     SPAN(class: "i fa fa-check")
   end
 end
 
-class CloseIcon <Hyperloop::Component
+class CloseIcon < Hyperloop::Component
   render do
     SPAN(class: "i fa fa-times")
+  end
+end
+
+class NewProbeIcon < Hyperloop::Component
+  render do
+    SPAN(class: "i fa fa-plus")
   end
 end

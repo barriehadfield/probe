@@ -4,10 +4,19 @@ module Probes
     include MuiTools
 
     param :probe
+    param :new_probe, default: false
+
+    puts "before"
 
     before_mount do
       mutate.edit_mode false
       mutate.hide_save false
+
+      if params.new_probe
+        puts "ots mew"
+        mutate.edit_mode true
+      end
+
     end
 
     render(DIV) do
@@ -25,7 +34,7 @@ module Probes
               SafeTimeAgo(date: params.probe.created_at )
             }
           }
-        Mui.Grid(item: true, sm: 2, justify: 'flex-end') {
+        Mui.Grid(item: true, sm: 2) {
           buttons
         }
       }
@@ -42,6 +51,7 @@ module Probes
 
       params.probe.save do |response|
         mutate.hide_save false
+        # Mui.Snackbar(message: "Changes saved", vertical: 'bottom', horizontal: 'right') { "xx" }
       end
     end
 

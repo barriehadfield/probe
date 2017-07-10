@@ -32,13 +32,28 @@ module Home
   class ProbeCards < Hyperloop::Component
     include MuiTools
 
+    def new_probe_fab
+      Mui.Grid(container: true, justify: 'flex-end', className: 'main-container add-probe-fab') {
+        Mui.Grid(item:true) {
+          Mui.Button(fab: true, color: :accent, onClick: -> { new_probe }) { NewProbeIcon() }
+        }
+      }
+    end
+
+    def new_probe
+      mutate.new_probe true
+    end
+
     render(DIV) do
-      # BR()
-      # rate_card
-      # BR()
-      # font_card
-      BR()
+      new_probe_fab
+
       Mui.Grid(container: true, justify: 'center', gutter: 16, direction: :column, className: 'main-container') {
+
+        if state.new_probe
+          Probes::Item(probe: Probe.new, new_probe: true)
+          BR()
+        end
+
         Probe.reverse.each do |probe|
           Probes::Item(probe: probe)
           BR()

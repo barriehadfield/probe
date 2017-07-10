@@ -25,3 +25,8 @@ body {
 .left-indent {
   padding-left: 30px;
 }
+
+.add-probe-fab {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
