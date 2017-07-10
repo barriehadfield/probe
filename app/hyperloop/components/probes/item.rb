@@ -56,7 +56,7 @@ module Probes
         Mui.IconButton(onClick: -> { edit } ) { SettingsIcon() }
       end
 
-      Mui.IconButton(onClick: -> { save } ) { SaveIcon() } if params.probe.changed? && !state.hide_save
+      Mui.Button(raised:true, color: :accent, onClick: -> { save } ) { "Save" } if params.probe.changed? && !state.hide_save
     end
 
     def body
