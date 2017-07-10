@@ -24,7 +24,7 @@ class Categorie < Hyperloop::Component
                 }
             } if params.edit_mode
 
-            Headline(element: :span) { params.name.upcase }
+            Title(element: :span) { params.name.upcase }
           }
           Mui.Grid(item: true) { Body1 { params.description } } if params.edit_mode
         }
