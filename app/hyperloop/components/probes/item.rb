@@ -7,6 +7,7 @@ module Probes
 
     before_mount do
       mutate.edit_mode false
+      mutate.hide_save false
     end
 
     render(DIV) do
@@ -30,20 +31,36 @@ module Probes
       }
     end
 
-    def buttons
-      Mui.IconButton(onClick: -> { mutate.edit_mode !state.edit_mode } ) { SettingsIcon() }
+    def cancel
+      params.probe.revert
+      mutate.edit_mode false
+    end
 
-      BUTTON {"Save"}.on(:click) {
-        params.probe.save
-        mutate.edit_mode false
-      }  if params.probe.changed?
+    def save
+      mutate.hide_save true
+      mutate.edit_mode false
+
+      params.probe.save do |response|
+        mutate.hide_save false
+      end
+    end
+
+    def edit
+      mutate.edit_mode !state.edit_mode
+    end
+
+    def buttons
+      if state.edit_mode
+        Mui.IconButton(onClick: -> { cancel } ) { CloseIcon() }
+      else
+        Mui.IconButton(onClick: -> { edit } ) { SettingsIcon() }
+      end
+
+      Mui.IconButton(onClick: -> { save } ) { SaveIcon() } if params.probe.changed? && !state.hide_save
     end
 
     def body
       Mui.Grid(container: true,  direction: :column) {
-        # Mui.Grid(item: true) {
-        #   buttons
-        # }
 
         Mui.Grid(item: true) {
           if state.edit_mode
