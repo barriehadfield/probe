@@ -6,20 +6,20 @@ module Probes
     param :probe
     param :new_probe, default: false
 
-    puts "before"
-
     before_mount do
-      mutate.edit_mode false
       mutate.hide_save false
-
-      if params.new_probe
-        puts "ots mew"
-        mutate.edit_mode true
-      end
-
+      mutate.edit_mode (params.new_probe ? true : false)
     end
 
     render(DIV) do
+      if params.new_probe
+        card if NewProbeStore.show
+      else
+        card
+      end
+    end
+
+    def card
       Mui.Card(className: 'main-card', raised: true) {
         heading
         body
@@ -28,13 +28,13 @@ module Probes
 
     def heading
       Mui.Grid(container: true) {
-        Mui.Grid(item: true, sm: 10) {
+        Mui.Grid(item: true, xs: 10) {
             Headline { params.probe.name }
             Caption { SPAN { "Updated " }
               SafeTimeAgo(date: params.probe.created_at )
             }
           }
-        Mui.Grid(item: true, sm: 2) {
+        Mui.Grid(item: true, xs: 2) {
           buttons
         }
       }
@@ -60,13 +60,17 @@ module Probes
     end
 
     def buttons
-      if state.edit_mode
-        Mui.IconButton(onClick: -> { cancel } ) { CloseIcon() }
-      else
-        Mui.IconButton(onClick: -> { edit } ) { SettingsIcon() }
-      end
+      Mui.Grid(container: true, justify: 'flex-end') {
+        if state.edit_mode
+          Mui.IconButton(onClick: -> { cancel } ) { CloseIcon() }
+        else
+          Mui.IconButton(onClick: -> { edit } ) { SettingsIcon() }
+        end
 
-      Mui.Button(raised:true, color: :accent, onClick: -> { save } ) { "Save" } if params.probe.changed? && !state.hide_save
+        Mui.Button(dense: true, raised: true, color: :accent, onClick: -> { save } ) {
+          "Save"
+        } if params.probe.changed? && !state.hide_save
+      }
     end
 
     def body

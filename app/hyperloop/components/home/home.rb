@@ -41,7 +41,7 @@ module Home
     end
 
     def new_probe
-      mutate.new_probe true
+      NewProbeStore.set !NewProbeStore.show
     end
 
     render(DIV) do
@@ -49,10 +49,8 @@ module Home
 
       Mui.Grid(container: true, justify: 'center', gutter: 16, direction: :column, className: 'main-container') {
 
-        if state.new_probe
-          Probes::Item(probe: Probe.new, new_probe: true)
-          BR()
-        end
+        Probes::Item(probe: Probe.new, new_probe: true)
+        BR()
 
         Probe.reverse.each do |probe|
           Probes::Item(probe: probe)
