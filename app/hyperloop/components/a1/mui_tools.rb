@@ -81,10 +81,6 @@ module MuiTools
 
   end
 
-  def input_style
-    { width: '100%' }
-  end
-
   def font_card
 
       Display1 { "Display1" }

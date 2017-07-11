@@ -30,12 +30,19 @@ module Probes
       Mui.Grid(container: true) {
         Mui.Grid(item: true, xs: 10) {
             Headline {
-              ProbeIcon()
-              " #{params.probe.name}"
+              if !state.edit_mode
+                ProbeIcon()
+                " #{params.probe.name}"
+              else
+                Mui.TextField(value: params.probe.name.to_s, label: "Name", style: { width: '100%' },
+                ).on(:change) do |e|
+                  params.probe.name = e.target.value
+                end
+              end
             }
             Caption { SPAN { "Updated " }
               SafeTimeAgo(date: params.probe.updated_at )
-            }
+            } unless state.edit_mode
           }
         Mui.Grid(item: true, xs: 2) {
           buttons
@@ -85,6 +92,7 @@ module Probes
 
         Mui.Grid(item: true) {
           if state.edit_mode
+            BR()
             SubHeading1 { "Choose one or more categories in the HEART framework that are the focus of this Probe (product or project)." }
           end
         }
