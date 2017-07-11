@@ -80,8 +80,8 @@ module Probes
           Mui.IconButton(onClick: -> { edit } ) { SettingsIcon() }
         end
 
-        # Mui.IconButton(color: :accent, onClick: -> { save } ) {
-        Mui.Button(fab: true, color: :accent, onClick: -> { save }) {
+        Mui.IconButton(color: :accent, onClick: -> { save } ) {
+        # Mui.Button(fab: true, color: :accent, onClick: -> { save }) {
           SaveIcon()
         } if params.probe.changed? && !state.hide_save
       }
