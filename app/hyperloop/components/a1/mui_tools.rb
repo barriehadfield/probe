@@ -49,7 +49,11 @@ module MuiTools
   end
 
   def Title
-    DIV(class: 'mdc-typography--title') { yield }
+    if params[:element] == :span
+      SPAN(class: 'mdc-typography--title') { yield }
+    else
+      DIV(class: 'mdc-typography--title') { yield }
+    end
   end
 
   def SubHeading1

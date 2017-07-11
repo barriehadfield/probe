@@ -17,15 +17,13 @@ class Categorie < Hyperloop::Component
 
         Mui.Grid(container: true, align: :center) {
           Mui.Grid(item: true) {
-
             SPAN {
                 Mui.Switch(checked: params.probe["#{params.categorie}_bool"] ).on(:change) {
                   params.probe["#{params.categorie}_bool"] = !params.probe["#{params.categorie}_bool"]
                 }
             } if params.edit_mode
-
-            Title(element: :span) { params.name.upcase }
           }
+          Mui.Grid { Title(element: :span) { params.name.upcase } }
           Mui.Grid(item: true) { Body1 { params.description } } if params.edit_mode
         }
 
