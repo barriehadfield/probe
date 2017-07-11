@@ -11,9 +11,9 @@ module Probes
       mutate.edit_mode (params.new_probe ? true : false)
     end
 
-    render(DIV) do
+    render do
       if params.new_probe
-        card if NewProbeStore.show
+        DIV(class: 'new-probe') { card } if NewProbeStore.show
       else
         card
       end
