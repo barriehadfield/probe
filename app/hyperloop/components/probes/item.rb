@@ -29,9 +29,12 @@ module Probes
     def heading
       Mui.Grid(container: true) {
         Mui.Grid(item: true, xs: 10) {
-            Headline { params.probe.name }
+            Headline {
+              ProbeIcon()
+              " #{params.probe.name}"
+            }
             Caption { SPAN { "Updated " }
-              SafeTimeAgo(date: params.probe.created_at )
+              SafeTimeAgo(date: params.probe.updated_at )
             }
           }
         Mui.Grid(item: true, xs: 2) {
@@ -43,11 +46,14 @@ module Probes
     def cancel
       params.probe.revert
       mutate.edit_mode false
+      NewProbeStore.set_show false
     end
 
     def save
       mutate.hide_save true
       mutate.edit_mode false
+
+      NewProbeStore.set_show false
 
       params.probe.save do |response|
         mutate.hide_save false
@@ -68,7 +74,7 @@ module Probes
         end
 
         # Mui.IconButton(color: :accent, onClick: -> { save } ) {
-        Mui.Button(fab: true, color: :accent, onClick: -> { save }) { 
+        Mui.Button(fab: true, color: :accent, onClick: -> { save }) {
           SaveIcon()
         } if params.probe.changed? && !state.hide_save
       }

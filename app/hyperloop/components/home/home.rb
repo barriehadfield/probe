@@ -32,31 +32,38 @@ module Home
   class ProbeCards < Hyperloop::Component
     include MuiTools
 
+    before_mount do
+      @dummy = Probe.new
+      @dummy.zero_out
+    end
+
+    render(DIV) do
+      new_probe_fab unless NewProbeStore.show
+
+      Mui.Grid(container: true, justify: 'center', gutter: 16, direction: :column, className: 'main-container') {
+
+        Probes::Item(probe: @dummy, new_probe: true, key: :unsaved)
+        BR()
+
+        Probe.reverse.each do |probe|
+          Probes::Item(probe: probe, key: probe.id)
+          BR()
+        end
+      }
+    end
+
     def new_probe_fab
       Mui.Grid(container: true, justify: 'flex-end', className: 'main-container add-probe-fab') {
         Mui.Grid(item:true) {
-          Mui.Button(fab: true, color: :accent, onClick: -> { new_probe }) { NewProbeIcon() }
+          Mui.Button(fab: true, color: :primary, onClick: -> { new_probe }) { NewProbeIcon() }
         }
       }
     end
 
     def new_probe
-      NewProbeStore.set !NewProbeStore.show
-    end
-
-    render(DIV) do
-      new_probe_fab
-
-      Mui.Grid(container: true, justify: 'center', gutter: 16, direction: :column, className: 'main-container') {
-
-        Probes::Item(probe: Probe.new, new_probe: true)
-        BR()
-
-        Probe.reverse.each do |probe|
-          Probes::Item(probe: probe)
-          BR()
-        end
-      }
+      @dummy = Probe.new
+      @dummy.zero_out
+      NewProbeStore.set_show !NewProbeStore.show
     end
   end
 
