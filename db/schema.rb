@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170630143223) do
+ActiveRecord::Schema.define(version: 20170712193254) do
 
   create_table "hyperloop_connections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "channel"
@@ -51,6 +51,17 @@ ActiveRecord::Schema.define(version: 20170630143223) do
     t.boolean "retention_bool", default: false
     t.boolean "task_bool", default: false
     t.index ["id"], name: "index_probes_on_id"
+  end
+
+  create_table "updates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "probe_id"
+    t.string "category"
+    t.index ["category"], name: "index_updates_on_category"
+    t.index ["id"], name: "index_updates_on_id"
+    t.index ["probe_id"], name: "index_updates_on_probe_id"
   end
 
 end
