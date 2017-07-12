@@ -1,4 +1,7 @@
 class Probe < ActiveRecord::Base
+
+  has_many :updates
+
   def zero_out
     self.name = ''
     self.happiness_bool = false

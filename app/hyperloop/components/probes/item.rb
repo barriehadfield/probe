@@ -97,13 +97,13 @@ module Probes
           end
         }
 
-        [ { categorie: :happiness, name: "Happiness", description: "Measures of user's attitudes" },
-          { categorie: :engagement, name: "Engagement", description: "Level of user involvement" },
-          { categorie: :adoption, name: "Adoption", description: "Gaining new users" },
-          { categorie: :retention, name: "Retention", description: "Rate at which existing users are returning" },
-          { categorie: :task, name: "Task Success", description: "Efficiency, effectiveness, and error rat" }
+        [ { category: :happiness, name: "Happiness", description: "Measures of user's attitudes" },
+          { category: :engagement, name: "Engagement", description: "Level of user involvement" },
+          { category: :adoption, name: "Adoption", description: "Gaining new users" },
+          { category: :retention, name: "Retention", description: "Rate at which existing users are returning" },
+          { category: :task, name: "Task Success", description: "Efficiency, effectiveness, and error rat" }
         ].each do |cat|
-          Categorie(categorie: cat[:categorie], name: cat[:name], description: cat[:description],
+          Category(category: cat[:category], name: cat[:name], description: cat[:description],
             edit_mode: state.edit_mode, probe: params.probe)
         end
       }

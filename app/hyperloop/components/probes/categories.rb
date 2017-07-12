@@ -1,8 +1,8 @@
-class Categorie < Hyperloop::Component
+class Category < Hyperloop::Component
 
   include MuiTools
 
-  param :categorie
+  param :category
   param :name
   param :description
 
@@ -11,15 +11,15 @@ class Categorie < Hyperloop::Component
 
   render(DIV) do
     Mui.Grid(item: true) {
-      if params.probe["#{params.categorie}_bool"] || params.edit_mode
+      if params.probe["#{params.category}_bool"] || params.edit_mode
         Mui.Divider(light: true)
         BR()
 
         Mui.Grid(container: true, align: :center) {
           Mui.Grid(item: true) {
             SPAN {
-                Mui.Switch(checked: params.probe["#{params.categorie}_bool"] ).on(:change) {
-                  params.probe["#{params.categorie}_bool"] = !params.probe["#{params.categorie}_bool"]
+                Mui.Switch(checked: params.probe["#{params.category}_bool"] ).on(:change) {
+                  params.probe["#{params.category}_bool"] = !params.probe["#{params.category}_bool"]
                 }
             } if params.edit_mode
           }
@@ -29,19 +29,19 @@ class Categorie < Hyperloop::Component
 
       end
 
-      if params.probe["#{params.categorie}_bool"]
+      if params.probe["#{params.category}_bool"]
         DIV(class: 'left-indent') {
           BR()
 
-          InputInplace(field: "#{params.categorie}_goals", model: params.probe, label: "Goals",
+          InputInplace(field: "#{params.category}_goals", model: params.probe, label: "Goals",
             placeholder: "What are you trying to achieve?", edit_mode: params.edit_mode)
           BR()
 
-          InputInplace(field: "#{params.categorie}_signals", model: params.probe, label: "Signals",
+          InputInplace(field: "#{params.category}_signals", model: params.probe, label: "Signals",
             placeholder: "What signals do you expect to see?", edit_mode: params.edit_mode)
           BR()
 
-          InputInplace(field: "#{params.categorie}_metrics", model: params.probe, label: "Metrics",
+          InputInplace(field: "#{params.category}_metrics", model: params.probe, label: "Metrics",
             placeholder: "And how will you measure this?", edit_mode: params.edit_mode)
           BR()
         }
