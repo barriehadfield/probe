@@ -1,5 +1,6 @@
 class CategoryUpdates < Hyperloop::Component
   param :probe
+  param :hide_save_store
 
   before_mount do
     reset
@@ -31,6 +32,7 @@ class CategoryUpdates < Hyperloop::Component
       params.probe.updated_at = update.created_at
       params.probe.save
       reset
+      params.hide_save_store.set_hide_save = true
     end
   end
 

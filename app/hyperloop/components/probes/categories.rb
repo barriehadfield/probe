@@ -5,9 +5,14 @@ class Category < Hyperloop::Component
   param :category
   param :name
   param :description
+  param :hide_save_store
 
   param :edit_mode
   param :probe
+
+  before_mount do
+    mutate.show_more false
+  end
 
   render(DIV) do
     Mui.Grid(item: true) {
@@ -19,21 +24,35 @@ class Category < Hyperloop::Component
 
   def updates
     if params.probe["#{params.category}_bool"] && !params.edit_mode
-      CategoryUpdates(probe: params.probe)
+      CategoryUpdates(probe: params.probe, hide_save_store: params.hide_save_store)
       last_update
+      if params.probe.updates.count > 1
+        Mui.Button() { "More" }.on(:click) do
+          mutate.show_more true
+        end unless state.show_more
+      end
+      if state.show_more
+        params.probe.updates.reverse.drop(1).each do |u|
+          update u
+        end
+      end
     end
   end
 
   def last_update
+    update params.probe.updates.last if params.probe.updates.last
+  end
+
+  def update u
     DIV(class: 'left-indent') {
       Mui.Grid(container: true) {
         Mui.Grid(item: true) {
           Mui.Avatar() { HeartIcon() }
         }
         Mui.Grid(item: true) {
-          P { params.probe.updates.last.body.to_s }
+          P { u.body.to_s }
           Caption { SPAN { "Updated " }
-            SafeTimeAgo(date: params.probe.updates.last.created_at )
+            SafeTimeAgo(date: u.created_at )
           }
         }
       }

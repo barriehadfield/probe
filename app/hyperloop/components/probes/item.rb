@@ -7,8 +7,10 @@ module Probes
     param :new_probe, default: false
 
     before_mount do
-      mutate.hide_save false
+      # mutate.hide_save false
       mutate.edit_mode (params.new_probe ? true : false)
+      @hide_save_store = SaveProbeStore.new
+      @hide_save_store.set_hide_save false if params.new_probe
     end
 
     render do
@@ -57,19 +59,22 @@ module Probes
     end
 
     def save
-      mutate.hide_save true
+      # mutate.hide_save true
+      @hide_save_store.set_hide_save true
       mutate.edit_mode false
 
       NewProbeStore.set_show false
 
       params.probe.save do |response|
-        mutate.hide_save false
+        # mutate.hide_save false
+        @hide_save_store.set_hide_save true
         # Mui.Snackbar(message: "Changes saved", vertical: 'bottom', horizontal: 'right') { "xx" }
       end
     end
 
     def edit
       mutate.edit_mode !state.edit_mode
+      @hide_save_store.set_hide_save false
     end
 
     def buttons
@@ -83,7 +88,7 @@ module Probes
         Mui.IconButton(color: :accent, onClick: -> { save } ) {
         # Mui.Button(fab: true, color: :accent, onClick: -> { save }) {
           SaveIcon()
-        } if params.probe.changed? && !state.hide_save
+        } if params.probe.changed? && !@hide_save_store.hide_save
       }
     end
 
@@ -104,7 +109,7 @@ module Probes
           { category: :task, name: "Task Success", description: "Efficiency, effectiveness, and error rat" }
         ].each do |cat|
           Category(category: cat[:category], name: cat[:name], description: cat[:description],
-            edit_mode: state.edit_mode, probe: params.probe)
+            edit_mode: state.edit_mode, probe: params.probe, hide_save_store: @hide_save_store)
         end
       }
     end
