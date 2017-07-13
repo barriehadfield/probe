@@ -10,7 +10,7 @@ class InputInplace < Hyperloop::Component
 
   param args: {}
 
-  render(DIV) do
+  render do
    if params.edit_mode
      Mui.TextField(value: params.model[params.field.to_s].to_s, label: params.label,
      style: { width: '100%' },
@@ -19,7 +19,7 @@ class InputInplace < Hyperloop::Component
      end
    else
     #  Label { params.label } if params.label
-     Body1 { params.model.send(params.field) }
+     Body1 { params.model.send(params.field) } if params.model.send(params.field)
    end
  end
 
