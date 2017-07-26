@@ -25,6 +25,8 @@ gem 'hyperloop'
 gem 'opal_hot_reloader', git: 'https://github.com/fkchang/opal-hot-reloader.git'
 # gem 'hyper-console'
 
+gem 'statesman'
+
 gem 'webpacker'
 
 gem 'foreman'

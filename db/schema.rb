@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170712193254) do
+ActiveRecord::Schema.define(version: 20170726153041) do
 
   create_table "hyperloop_connections", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "channel"
@@ -25,7 +25,20 @@ ActiveRecord::Schema.define(version: 20170712193254) do
     t.integer "connection_id"
   end
 
-  create_table "probes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "probe_transitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "to_state", null: false
+    t.text "metadata"
+    t.integer "sort_key", null: false
+    t.integer "probe_id", null: false
+    t.boolean "most_recent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["probe_id", "most_recent"], name: "index_probe_transitions_parent_most_recent", unique: true
+    t.index ["probe_id", "sort_key"], name: "index_probe_transitions_parent_sort", unique: true
+  end
+
+  create_table "probes", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -64,4 +77,5 @@ ActiveRecord::Schema.define(version: 20170712193254) do
     t.index ["probe_id"], name: "index_updates_on_probe_id"
   end
 
+  add_foreign_key "probe_transitions", "probes"
 end
