@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20170726153041) do
     t.integer "connection_id"
   end
 
-  create_table "probe_transitions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "probe_transitions", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "to_state", null: false
     t.text "metadata"
     t.integer "sort_key", null: false
@@ -37,8 +37,7 @@ ActiveRecord::Schema.define(version: 20170726153041) do
     t.index ["probe_id", "sort_key"], name: "index_probe_transitions_parent_sort", unique: true
   end
 
-  create_table "probes", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "id"
+  create_table "probes", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -66,7 +65,7 @@ ActiveRecord::Schema.define(version: 20170726153041) do
     t.index ["id"], name: "index_probes_on_id"
   end
 
-  create_table "updates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "updates", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -1,6 +1,6 @@
 class CreateProbeTransitions < ActiveRecord::Migration[5.1]
   def change
-    create_table :probe_transitions do |t|
+    create_table :probe_transitions, id: :integer do |t|
       t.string :to_state, null: false
       t.text :metadata
       t.integer :sort_key, null: false
@@ -10,7 +10,7 @@ class CreateProbeTransitions < ActiveRecord::Migration[5.1]
     end
 
     # Foreign keys are optional, but highly recommended
-    add_foreign_key :probe_transitions, :probes, column: :probe_id
+    add_foreign_key :probe_transitions, :probes
 
     add_index(:probe_transitions,
               [:probe_id, :sort_key],
