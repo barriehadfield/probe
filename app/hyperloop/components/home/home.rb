@@ -42,6 +42,9 @@ module Home
 
       Mui.Grid(container: true, justify: 'center', gutter: 16, direction: :column, className: 'main-container') {
 
+        H1 { Probe.first.name }
+        H1 { Probe.first.state_machine.current_state }
+
         Probes::Item(probe: @dummy, new_probe: true, key: :unsaved)
         BR()
 
